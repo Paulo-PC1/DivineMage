@@ -1,0 +1,5 @@
+Build -> cmake cmake -S . -B Build
+
+Compile -> cmake --build build --config Debug
+
+Execute Game: cd build, cd Debug, .\DivineMage.exe on Windows (.\DivineMage on linux/macOS)

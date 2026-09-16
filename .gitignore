@@ -1,0 +1,39 @@
+# ===== Build (CMake) =====
+# Pasta inteira de build: aqui o CMake baixa/compila raylib e nlohmann_json
+# via FetchContent, e ficam os binários gerados. Nunca deve ir pro repositório.
+build/
+out/
+cmake-build-*/
+
+# Segurança extra, caso algum build aconteça "in-source" por engano
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# ===== Binários e arquivos compilados =====
+*.o
+*.obj
+*.exe
+*.out
+*.pdb
+*.ilk
+*.exp
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+
+# ===== Editores / IDEs =====
+.vscode/
+.idea/
+
+# ===== Sistema operacional =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Logs =====
+*.log
