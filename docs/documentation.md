@@ -97,3 +97,9 @@ Nome: Menu
 Descrição: Deve ter um menu de navegação simples e facil de se utlizar
 Prioridade: MÉDIA
 Complexidade: BAIXA
+
+RNF005
+Nome: Sprite Size
+Descrição: os tamanhos dos sprites do persoangem principal e inimigos base serão 32x32px, Já o Boss sera 64x64px
+Prioridade: ALTA
+Complexidade: MÉDIA
