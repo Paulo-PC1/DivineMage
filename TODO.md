@@ -2,7 +2,7 @@
 
 ## Fase 1 Conceito e ideias gerais
 
-- [ ] Conceito inicial do game e princpais mecânicas do jogo
+- [x] Conceito inicial do game e princpais mecânicas do jogo
 - [ ] Concept inicial dos personagens, itens, inimigos, mapas(tilesets)
 
 ## Fase 2 Inicio do código
