@@ -11,3 +11,7 @@ Fiz o levantamento de requisitos funcionais e não funcionas do gae e fiz a idea
 ## Dia 20/09/2026
 
 Adição de mais alguns requisitos, código inicial que movimenta player em cenário vazio e criação dos tiles do mapa
+
+## Dia 21/09/2026
+
+Assisti o seguinte tutorial e para substituir a bolinha vermelha por um sprite genérico que um personagem para testar carregamento de texturas para gerar animação idle e de movimento do personagem <https://www.youtube.com/watch?v=wKiEA0PVCoE>
