@@ -18,4 +18,4 @@ Assisti o seguinte tutorial e para substituir a bolinha vermelha por um sprite g
 
 ## Dia 23/09/2026
 
-Troquei o código estruturado direto para uso de Structs e Funções (em suma não mudou nada efetivamente apenas a estruturação do código), troquei a resolução da tela de 800 x 600 para 1280 x 720
+Troquei o código estruturado direto para uso de Structs e Funções (em suma não mudou nada efetivamente apenas a estruturação do código), troquei a resolução da tela de 800 x 600 para 1280 x 720.
