@@ -10,12 +10,16 @@ Fiz o levantamento de requisitos funcionais e não funcionas do gae e fiz a idea
 
 ## Dia 20/09/2026
 
-Adição de mais alguns requisitos, código inicial que movimenta player em cenário vazio e criação dos tiles do mapa
+Adição de mais alguns requisitos, código inicial que movimenta player em cenário vazio e criação dos tiles do mapa.
 
 ## Dia 21/09/2026
 
-Assisti o seguinte tutorial e para substituir a bolinha vermelha por um sprite genérico que um personagem para testar carregamento de texturas para gerar animação idle e de movimento do personagem <https://www.youtube.com/watch?v=wKiEA0PVCoE>
+Assisti o seguinte tutorial e para substituir a bolinha vermelha por um sprite genérico que um personagem para testar carregamento de texturas para gerar animação idle e de movimento do personagem <https://www.youtube.com/watch?v=wKiEA0PVCoE>.
 
 ## Dia 23/09/2026
 
 Troquei o código estruturado direto para uso de Structs e Funções (em suma não mudou nada efetivamente apenas a estruturação do código), troquei a resolução da tela de 800 x 600 para 1280 x 720.
+
+## Dia 24/09/2026
+
+Atualizei os aqrquivos do projeto separando as Structs e Funções criadas do código principal aplicando conceito de organização de rojeto C++ multi-arquivo.

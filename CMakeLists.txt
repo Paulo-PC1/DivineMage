@@ -29,6 +29,7 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}
 add_executable(DivineMage ${PROJECT_SOURCES})   
 
 target_include_directories(DivineMage PRIVATE include)
+target_include_directories(DivineMage PRIVATE include src)
 target_link_libraries(DivineMage PRIVATE raylib nlohmann_json::nlohmann_json)
 
 target_compile_definitions(DivineMage PRIVATE
