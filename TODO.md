@@ -7,8 +7,8 @@
 
 ## Fase 2 Inicio do código
 
-- [ ] Configurações inicias do projeto e codig
-- [ ] Movimentação de Formas com WSAD
+- [x] Configurações inicias do projeto e codig
+- [x] Movimentação de Formas com WSAD
 - [ ] Movimentação da camera que segue a tela do jogador (Ainda forma geométrica)
 
 ## Fase 3 Teste de colisão com formas simples
