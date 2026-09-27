@@ -22,11 +22,11 @@ int main(void)
  
     Player player = initPlayer(640.0f, 360.0f, 100.0f); // Cria o jogador (posição x, posição y, velocidade)
     Animation anim = initAnimation(player.texture, 6, 0.2f); // Cria a animação (textura, numero de frames, tempo de atualização)
-    Camera2D camera = initCamera(
-        { player.x, player.y },
-        { 1280.0f / 2, 720.0f / 2},
-        0.0f,
-        1.0f
+    Camera2D camera = initCamera( // Cria a camera (ponto do mundo que a camera aponta, onde o ponto do mundo que a camera aponta vai ser renderizado na tela, rotação da camera, zoom da camera)
+        { player.x, player.y }, // Define o ponto do mundo que a camera aponta para o ponto do jogador
+        { 1280.0f / 2, 720.0f / 2}, // Define onde o ponto do mundo que a camera aponta vai ser renderizado na tela (centro da tela)
+        0.0f, // Define a rotação da camera (0 graus)
+        1.0f // Define o zoom da camera (1.0f = sem zoom)
     );
     
     // Loop principal do programa
@@ -35,20 +35,20 @@ int main(void)
         float dt = GetFrameTime(); // Tempo de atualização do frame
  
         // Atualiza as variaveis do jogo
-        updatePlayer(player, dt);
-        updateAnimation(anim, dt);
-        updateCameraFollow(camera, {player.x, player.y});
+        updatePlayer(player, dt); // atualiza a posiçao do jogador 
+        updateAnimation(anim, dt); // atualiza a animação 
+        updateCameraFollow(camera, {player.x, player.y}); // atualiza a posição da camera para seguir o jogador
  
         // Desenha na tela
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
+        BeginDrawing(); // inicia o desenho na tela
+        ClearBackground(RAYWHITE); // Limpa a tela com a cor selecionada
         
-        BeginMode2D(camera);
+        BeginMode2D(camera); // inicio do modo 2D com a camera definida
             DrawText("DivineMage", 640, 360, 20, BLACK); // Desenha o texto na tela
-            drawPlayer(player, anim);
+            drawPlayer(player, anim); // Desenha o jogador na tela
             
-            
-        EndMode2D();
+        EndMode2D(); // fim do modo 2D com a camera definida
+        DrawText("Vida: 100", 10, 10, 20, BLACK); // Desenha o texto na tela (Exemplo de HUD)
         EndDrawing(); // Encerra o desenho na tela e troca os buffers (double buffering)
     }
  

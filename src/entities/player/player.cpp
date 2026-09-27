@@ -58,5 +58,5 @@ void drawPlayer(const Player &player, const Animation &anim)
 // Descarrega a textura do jogador
 void unloadPlayer(Player &player)
 {
-    UnloadTexture(player.texture);
+    UnloadTexture(player.texture); // Descarrega a textura do jogador da memoria
 }

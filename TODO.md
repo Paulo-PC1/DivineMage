@@ -9,7 +9,7 @@
 
 - [x] Configurações inicias do projeto e codig
 - [x] Movimentação de Formas com WSAD
-- [ ] Movimentação da camera que segue a tela do jogador (Ainda forma geométrica)
+- [x] Movimentação da camera que segue a tela do jogador (Ainda forma geométrica)
 
 ## Fase 3 Teste de colisão com formas simples
 

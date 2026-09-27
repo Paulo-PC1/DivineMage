@@ -23,3 +23,7 @@ Troquei o código estruturado direto para uso de Structs e Funções (em suma n�
 ## Dia 24/09/2026
 
 Atualizei os aqrquivos do projeto separando as Structs e Funções criadas do código principal aplicando conceito de organização de rojeto C++ multi-arquivo.
+
+## Dia 26/09/2026 e 27/09/2026
+
+Implementei a função da camera 2d que segue o movimento do jogador seguindo o padrão de projeto estipulado.
