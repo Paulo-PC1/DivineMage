@@ -1,10 +1,11 @@
 #include "player.hpp"
 
-// Cria o jogador com posição inicial, velocidade e textura inicial
+// Cria o jogador com posição inicial, velocidade, olhnado esquerda(falso) e se movendo(falso)
 Player::Player(float x, float y, float speed) :
-    _x(x), _y(y), _oldPos({x, y}), _speed(speed)
+    _x(x), _y(y), _speed(speed), _facingLeft(false), _isMoving(false)
 {
-    _texture = loadTexture("../../assets/sprites/Player.png", false); // Carrega a textura do jogador
+    _idleTexture = loadTexture("../../assets/sprites/Player.png", false); // Carrega a textura do jogador parado
+    _walkTexture = loadTexture("../../assets/sprites/player_walking.png", false); // Carrega a textura do jogador se movendo
 }
 
 
@@ -26,36 +27,52 @@ Texture2D Player::loadTexture(const char *filePath, bool flipHorizontal){
 // Atualiza o movimento e a textura do jogador
 void Player::update(float dt)
 {
-    if(IsKeyDown(KEY_W)) _y -= _speed * dt; // Se a tecla W estiver pressionada, o jogador se move para cima
-    if(IsKeyDown(KEY_S)) _y += _speed * dt; // Se a tecla S estiver pressionada, o jogador se move para baixo
-    if(IsKeyDown(KEY_A)){ // Se a tecla A estiver pressionada, o jogador se move para esquerda
-        _x -= _speed * dt; // Se a tecla A estiver pressionada, o jogador se move para esquerda
-        UnloadTexture(_texture); // Descarrega a textura do jogador
-        _texture = loadTexture("../../assets/sprites/player_walking.png", true); // Carrega a imagem do jogador andando para esquerda (invertida)
+    _isMoving = false;
+    
+    // Se a tecla W estiver pressionada, o jogador se move para cima
+    if(IsKeyDown(KEY_W)) { 
+        _y -= _speed * dt; 
+        _isMoving = true;
     }
-    if(IsKeyDown(KEY_D)) { // Se a tecla D estiver pressionada, o jogador se move para direita
+    // Se a tecla S estiver pressionada, o jogador se move para baixo
+    if(IsKeyDown(KEY_S)) {
+        _y += _speed * dt;
+        _isMoving = true; // se esta se movendo variavel fica veradadeira mudando o sprite
+    }
+    // Se a tecla A estiver pressionada, o jogador se move para esquerda
+    if(IsKeyDown(KEY_A)){
+        _x -= _speed * dt;
+        _isMoving = true;
+        _facingLeft = true; // se moveu para esquerda vaviavel para inverter se torna verdadeira
+    }
+    // Se a tecla D estiver pressionada, o jogador se move para direita
+    if(IsKeyDown(KEY_D)) { 
         _x += _speed * dt; // Se a tecla D estiver pressionada, o jogador se move para direita
-        UnloadTexture(_texture); // Descarrega a textura do jogador
-        _texture = loadTexture("../../assets/sprites/player_walking.png", false); // Carrega a imagem do jogador andando
+         _isMoving = true;
+        _facingLeft = false; // se moveu para direita vaviavel para inverter se torna falsa
     }
-    if(_oldPos.x == _x && _oldPos.y == _y){ // Se a posição do jogador não mudou, significa que ele parou de se mover
-        UnloadTexture(_texture); // Descarrega a textura do jogador
-        _texture = loadTexture("../../assets/sprites/Player.png", false); // Carrega a imagem do jogador
-    }
- 
-    _oldPos = {_x, _y }; // Atualiza a posição antiga do jogador
 }
 
 // Desenha o jogador na tela
 void Player::draw(const Animation &anim) const
 {
-    DrawTextureRec(_texture, anim.getFrameRec(), Vector2{ _x, _y }, WHITE); // Desenha a textura do jogador na posição
+    Texture2D currentTexture = _isMoving ? _walkTexture : _idleTexture; // Se textura atual for igual a se mover carrega a walkTexture se não a IdleTexture
+    
+    Rectangle sourceRec = anim.getFrameRec();
+    if (_facingLeft){
+        sourceRec.width = -sourceRec.width; // espelha na hora do desenho, sem uso de textura extra
+    }
+    
+    DrawTextureRec(currentTexture, sourceRec, Vector2{ _x, _y}, WHITE);
+    
 }
  
 // Descarrega a textura do jogador
 void Player::unload()
 {
-    UnloadTexture(_texture); // Descarrega a textura do jogador da memoria
+    UnloadTexture(_idleTexture); // Descarrega a textura do jogador parado da memoria
+    UnloadTexture(_walkTexture); // Descarrega a textura do jogador andando da memoria
+
 }
 
 // Getters
@@ -70,5 +87,5 @@ float Player::getY() const
 
 Texture2D Player::getTexture() const
 {
-    return _texture;
+    return _idleTexture;
 }

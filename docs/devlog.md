@@ -31,3 +31,6 @@ Implementei a função da camera 2d que segue o movimento do jogador seguindo o 
 ## Dia 30/09/2026
 
 Refatorei todo o código passando de `Struct para paradigma de Programação Orientada a Objeto POO(OOP)`, fiz as artes inicias do HUD sendo elas a vida e escudo mudar detalhes no sprite da dungeon, além de listar no TODO list a próxima fazes e as proxímas entidades, classes e funções do game devem ser criadas.
+
+Refatorei o código do player para que a imagem(sprite) seja carregado apenas 1 vez na memória do computador
+evitando comparações infinitad de estado.
