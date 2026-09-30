@@ -27,3 +27,7 @@ Atualizei os aqrquivos do projeto separando as Structs e Funções criadas do c�
 ## Dia 26/09/2026 e 27/09/2026
 
 Implementei a função da camera 2d que segue o movimento do jogador seguindo o padrão de projeto estipulado.
+
+## Dia 30/09/2026
+
+Refatorei todo o código passando de `Struct para paradigma de Programação Orientada a Objeto POO(OOP)`, fiz as artes inicias do HUD sendo elas a vida e escudo mudar detalhes no sprite da dungeon, além de listar no TODO list a próxima fazes e as proxímas entidades, classes e funções do game devem ser criadas.

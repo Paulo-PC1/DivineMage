@@ -1,7 +1,16 @@
-#include "player.h"
+#include "player.hpp"
+
+// Cria o jogador com posição inicial, velocidade e textura inicial
+Player::Player(float x, float y, float speed) :
+    _x(x), _y(y), _oldPos({x, y}), _speed(speed)
+{
+    _texture = loadTexture("../../assets/sprites/Player.png", false); // Carrega a textura do jogador
+}
+
 
 // Carrega a textura do jogador, redimensiona e inverte a imagem se necessário
-Texture2D loadPlayerTexture(const char *filePath, bool flipHorizontal){
+Texture2D Player::loadTexture(const char *filePath, bool flipHorizontal){
+    
     Image img = LoadImage(filePath); // Carrega a imagem do jogador
     int newWidth = static_cast<int>(img.width * 3); // Aumenta a largura da imagem em 3 vezes
     int newHeigth = static_cast<int>(img.height * 3); // Aumenta a altura da imagem em 3 vezes
@@ -14,49 +23,52 @@ Texture2D loadPlayerTexture(const char *filePath, bool flipHorizontal){
     return texture; // Retorna a textura do jogador
 }
 
-// Cria o jogador com posição inicial, velocidade e textura inicial
-Player initPlayer(float x, float y, float speed)
-{
-    Player player;
-    player.x = x; // Posição inicial do jogador no eixo x
-    player.y = y; // Posição inicial do jogador no eixo y
-    player.oldPos = { x, y }; // Posição inicial do jogador
-    player.speed = speed; // Velocidade do jogador
-    player.texture = loadPlayerTexture("../../assets/sprites/Player.png", false); // Carrega a textura do jogador
-    return player;
-}
-
 // Atualiza o movimento e a textura do jogador
-void updatePlayer(Player &player, float dt)
+void Player::update(float dt)
 {
-    if(IsKeyDown(KEY_W)) player.y -= player.speed * dt; // Se a tecla W estiver pressionada, o jogador se move para cima
-    if(IsKeyDown(KEY_S)) player.y += player.speed * dt; // Se a tecla S estiver pressionada, o jogador se move para baixo
+    if(IsKeyDown(KEY_W)) _y -= _speed * dt; // Se a tecla W estiver pressionada, o jogador se move para cima
+    if(IsKeyDown(KEY_S)) _y += _speed * dt; // Se a tecla S estiver pressionada, o jogador se move para baixo
     if(IsKeyDown(KEY_A)){ // Se a tecla A estiver pressionada, o jogador se move para esquerda
-        player.x -= player.speed * dt; // Se a tecla A estiver pressionada, o jogador se move para esquerda
-        UnloadTexture(player.texture); // Descarrega a textura do jogador
-        player.texture = loadPlayerTexture("../../assets/sprites/player_walking.png", true); // Carrega a imagem do jogador andando para esquerda (invertida)
+        _x -= _speed * dt; // Se a tecla A estiver pressionada, o jogador se move para esquerda
+        UnloadTexture(_texture); // Descarrega a textura do jogador
+        _texture = loadTexture("../../assets/sprites/player_walking.png", true); // Carrega a imagem do jogador andando para esquerda (invertida)
     }
     if(IsKeyDown(KEY_D)) { // Se a tecla D estiver pressionada, o jogador se move para direita
-        player.x += player.speed * dt; // Se a tecla D estiver pressionada, o jogador se move para direita
-        UnloadTexture(player.texture); // Descarrega a textura do jogador
-        player.texture = loadPlayerTexture("../../assets/sprites/player_walking.png", false); // Carrega a imagem do jogador andando
+        _x += _speed * dt; // Se a tecla D estiver pressionada, o jogador se move para direita
+        UnloadTexture(_texture); // Descarrega a textura do jogador
+        _texture = loadTexture("../../assets/sprites/player_walking.png", false); // Carrega a imagem do jogador andando
     }
-    if(player.oldPos.x == player.x && player.oldPos.y == player.y){ // Se a posição do jogador não mudou, significa que ele parou de se mover
-        UnloadTexture(player.texture); // Descarrega a textura do jogador
-        player.texture = loadPlayerTexture("../../assets/sprites/Player.png", false); // Carrega a imagem do jogador
+    if(_oldPos.x == _x && _oldPos.y == _y){ // Se a posição do jogador não mudou, significa que ele parou de se mover
+        UnloadTexture(_texture); // Descarrega a textura do jogador
+        _texture = loadTexture("../../assets/sprites/Player.png", false); // Carrega a imagem do jogador
     }
  
-    player.oldPos = { player.x, player.y }; // Atualiza a posição antiga do jogador
+    _oldPos = {_x, _y }; // Atualiza a posição antiga do jogador
 }
 
 // Desenha o jogador na tela
-void drawPlayer(const Player &player, const Animation &anim)
+void Player::draw(const Animation &anim) const
 {
-    DrawTextureRec(player.texture, anim.frameRec, Vector2{ player.x, player.y }, WHITE); // Desenha a textura do jogador na posição
+    DrawTextureRec(_texture, anim.getFrameRec(), Vector2{ _x, _y }, WHITE); // Desenha a textura do jogador na posição
 }
  
 // Descarrega a textura do jogador
-void unloadPlayer(Player &player)
+void Player::unload()
 {
-    UnloadTexture(player.texture); // Descarrega a textura do jogador da memoria
+    UnloadTexture(_texture); // Descarrega a textura do jogador da memoria
+}
+
+// Getters
+float Player::getX() const { 
+    return _x;  
+}
+
+float Player::getY() const
+{
+    return _y;
+}
+
+Texture2D Player::getTexture() const
+{
+    return _texture;
 }
