@@ -34,3 +34,7 @@ Refatorei todo o código passando de `Struct para paradigma de Programação Ori
 
 Refatorei o código do player para que a imagem(sprite) seja carregado apenas 1 vez na memória do computador
 evitando comparações infinitad de estado.
+
+## Dia 01/10/2026
+
+Atualizei parte do código do jogador para deixar mais genérico e não ter problemas em relação a animação do personagem

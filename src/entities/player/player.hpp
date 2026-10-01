@@ -12,7 +12,7 @@ class Player {
         void update (float dt);
         
         //Desenha o jogador na tela
-        void draw(const Animation &anim) const;
+        void draw() const;
         
         //Descarrega a textura do jogador
         void unload();
@@ -20,7 +20,6 @@ class Player {
         //Getters
         float getX() const;
         float getY() const;
-        Texture2D getTexture() const;
     
     private:
     
@@ -29,10 +28,12 @@ class Player {
         float _x; // Posição do jogador no eixo x
         float _y; // Posição do jogador no eixo y
         float _speed; // Velocidade do jogador
-        Texture2D _idleTexture; // Textura do jogador parado (carrega Player.png 1 vez só)
-        Texture2D _walkTexture; // Textura do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
         bool _facingLeft; // Variavel para verificar se jogador está olhando para esquerda
         bool _isMoving; // Variável para verificar se ogador está se movimentando
+        Texture2D _idleTexture; // Textura do jogador parado (carrega Player.png 1 vez só)
+        Texture2D _walkTexture; // Textura do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
+        Animation _idleAnim; // Animação do jogador parado (carrega Player.png 1 vez só)
+        Animation _walkAnim; // Animação do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
         
 };
 

@@ -2,11 +2,12 @@
 
 // Cria o jogador com posição inicial, velocidade, olhnado esquerda(falso) e se movendo(falso)
 Player::Player(float x, float y, float speed) :
-    _x(x), _y(y), _speed(speed), _facingLeft(false), _isMoving(false)
-{
-    _idleTexture = loadTexture("../../assets/sprites/Player.png", false); // Carrega a textura do jogador parado
-    _walkTexture = loadTexture("../../assets/sprites/player_walking.png", false); // Carrega a textura do jogador se movendo
-}
+    _x(x), _y(y), _speed(speed), _facingLeft(false), _isMoving(false),
+    _idleTexture(loadTexture("../../assets/sprites/Player.png", false)), // Carrega a textura do jogador parado
+    _walkTexture(loadTexture("../../assets/sprites/player_walking.png", false)), // Carrega a textura do jogador se movendo
+    _idleAnim(_idleTexture, 6, 0.2f),   // ajuste 6 pro total de frames real do seu novo Player.png
+    _walkAnim(_walkTexture, 6, 0.15f)   // ajuste 8 pro total de frames real do player_walking.png
+{}
 
 
 // Carrega a textura do jogador, redimensiona e inverte a imagem se necessário
@@ -51,11 +52,18 @@ void Player::update(float dt)
          _isMoving = true;
         _facingLeft = false; // se moveu para direita vaviavel para inverter se torna falsa
     }
+    
+    if(_isMoving) {
+        _walkAnim.update(dt); // Atualiza a animação do jogador andando
+    } else {
+        _idleAnim.update(dt); // Atualiza a animação do jogador parado
+    }
 }
 
 // Desenha o jogador na tela
-void Player::draw(const Animation &anim) const
+void Player::draw() const
 {
+    const Animation &anim = _isMoving ? _walkAnim : _idleAnim; // Se animação atual for igual a se mover carrega a walkAnim se não a IdleAnim
     Texture2D currentTexture = _isMoving ? _walkTexture : _idleTexture; // Se textura atual for igual a se mover carrega a walkTexture se não a IdleTexture
     
     Rectangle sourceRec = anim.getFrameRec();
@@ -83,9 +91,4 @@ float Player::getX() const {
 float Player::getY() const
 {
     return _y;
-}
-
-Texture2D Player::getTexture() const
-{
-    return _idleTexture;
 }
