@@ -20,7 +20,7 @@ Um game onde você é um mago sem forma física que esta preso em uma masmorra e
 RF001
 Nome: Loop Gameplay
 Descrição: Sistema deve possuir loop de gameplay onde jogador começa jogo passa por fasses(cenários) e finalia ao enfrentar Boss
-Observação: Deve possuir níumero X de fases e 1 Boss ai final dela que a cada vez que clia em jogar é trocado tudo
+Observação: Deve possuir níumero X de fases e 1 Boss ai final dela
 Prioridade: ALTA
 Complexidade: MÉDIA
 

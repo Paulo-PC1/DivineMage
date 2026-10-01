@@ -17,13 +17,15 @@ class Player {
         //Descarrega a textura do jogador
         void unload();
         
+        Vector2 getCenter() const;
+        
         //Getters
         float getX() const;
         float getY() const;
     
     private:
     
-        Texture2D loadTexture(const char *filePath, bool flipHorizontal); // Carrega a textura do jogador, redimensiona e inverte a imagem se necessário
+        Texture2D loadTexture(const char *filePath); // Carrega a textura do jogador
     
         float _x; // Posição do jogador no eixo x
         float _y; // Posição do jogador no eixo y

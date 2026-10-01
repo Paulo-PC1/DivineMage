@@ -20,12 +20,12 @@ int main(void)
     InitWindow(1280, 720, "DivineMage"); // Inicializa a janela do jogo com largura 800, altura 600 e título "DivineMage"
     SetTargetFPS(60); // Define a taxa de quadros por segundo (FPS) para 60, garantindo uma atualização suave da tela e dos elementos do jogo.
  
-    Player player (640.0f, 360.0f, 100.0f); // Cria o jogador (posição x, posição y, velocidade)
+    Player player (640.0f, 360.0f, 60.0f); // Cria o jogador (posição x, posição y, velocidade)
     GameCamera camera ( // Cria a camera (ponto do mundo que a camera aponta, onde o ponto do mundo que a camera aponta vai ser renderizado na tela, rotação da camera, zoom da camera)
-        { player.getX(), player.getY() }, // Define o ponto do mundo que a camera aponta para o ponto do jogador
-        { 1280.0f / 2, 720.0f / 2}, // Define onde o ponto do mundo que a camera aponta vai ser renderizado na tela (centro da tela)
+        player.getCenter(), // Define o ponto do mundo que a camera aponta para o ponto do jogador
+        { 1280.0f / 2.0f, 720.0f / 2.0f}, // Define onde o ponto do mundo que a camera aponta vai ser renderizado na tela (centro da tela)
         0.0f, // Define a rotação da camera (0 graus)
-        1.0f // Define o zoom da camera (1.0f = sem zoom)
+        3.0f // Define o zoom da camera (3.0f = com zoom)
     );
     
     // Loop principal do programa
@@ -35,7 +35,7 @@ int main(void)
  
         // Atualiza as variaveis do jogo
         player.update(dt); // atualiza a posiçao do jogador 
-        camera.follow({player.getX(), player.getY()}); // atualiza a posição da camera para seguir o jogador
+        camera.follow(player.getCenter()); // atualiza a posição da camera para seguir o jogador
  
         // Desenha na tela
         BeginDrawing(); // inicia o desenho na tela

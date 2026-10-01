@@ -1,4 +1,4 @@
-Build -> cmake cmake -S . -B Build
+Build -> cmake cmake -S . -B build
 
 Compile -> cmake --build build --config Debug
 

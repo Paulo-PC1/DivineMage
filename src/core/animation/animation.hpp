@@ -10,6 +10,9 @@ class Animation {
         //Atualiza o frame atual conforme o tempo passa
         void update(float dt);
         
+        // Reseta a animação para o frame inicial
+        void reset() { _currentFrame = 0; _frameTime = 0.0f; }
+        
         //Getter usado por quem for desenhar com essa animação (ex: Player::draw)
         Rectangle getFrameRec() const;
     

@@ -16,7 +16,7 @@ void Animation::update(float dt)
 {
     _frameTime += dt; // Acumula o tempo de atualização do frame
  
-    if (_frameTime >= _updateTime){
+    while (_frameTime >= _updateTime){
         _frameTime -= _updateTime; // Reseta o tempo de atualização do frame
         _currentFrame++; // Incrementa o frame atual
         if (_currentFrame >= _totalFrames){ // Se o frame atual for maior ou igual ao numero total de frames, reseta o frame atual
