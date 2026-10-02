@@ -4,8 +4,10 @@
 #include "core/camera/camera.hpp"
 #include <iostream>
 //--------------------------------------------------------
-// Estruturas e Funções do Programa
+// Estruturas e Constantes do Programa
 //--------------------------------------------------------
+const int SCREEN_WIDTH = 1280; // Constantes para representar a tela e evitar numeros mágicos (subtituir por config.hpp)
+const int SCREEN_HEIGHT = 720; // Constantes para representar a tela e evitar numeros mágicos (subtituir por config.hpp)
 
 //--------------------------------------------------------
 // Funçoes do Programa
@@ -17,13 +19,13 @@
 int main(void)
 {
     // Inicializa a tela
-    InitWindow(1280, 720, "DivineMage"); // Inicializa a janela do jogo com largura 800, altura 600 e título "DivineMage"
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "DivineMage"); // Inicializa a janela do jogo com largura 1280, altura 720 e título "DivineMage"
     SetTargetFPS(60); // Define a taxa de quadros por segundo (FPS) para 60, garantindo uma atualização suave da tela e dos elementos do jogo.
  
     Player player (640.0f, 360.0f, 60.0f); // Cria o jogador (posição x, posição y, velocidade)
     GameCamera camera ( // Cria a camera (ponto do mundo que a camera aponta, onde o ponto do mundo que a camera aponta vai ser renderizado na tela, rotação da camera, zoom da camera)
         player.getCenter(), // Define o ponto do mundo que a camera aponta para o ponto do jogador
-        { 1280.0f / 2.0f, 720.0f / 2.0f}, // Define onde o ponto do mundo que a camera aponta vai ser renderizado na tela (centro da tela)
+        { SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f}, // Define onde o ponto do mundo que a camera aponta vai ser renderizado na tela (centro da tela)
         0.0f, // Define a rotação da camera (0 graus)
         3.0f // Define o zoom da camera (3.0f = com zoom)
     );
@@ -42,7 +44,7 @@ int main(void)
         ClearBackground(RAYWHITE); // Limpa a tela com a cor selecionada
         
         BeginMode2D(camera.get()); // inicio do modo 2D com a camera definida
-            DrawText("DivineMage", 640, 360, 20, BLACK); // Desenha o texto na tela
+            DrawText("DivineMage", SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 20, BLACK); // Desenha o texto na tela
             player.draw(); // Desenha o jogador na tela    
         EndMode2D(); // fim do modo 2D com a camera definida
         
