@@ -1,6 +1,8 @@
-#pragma once
-#include "raylib.h"
+//DivineMage - Shooter/src/core/camera/camera.hpp
+#pragma once // Diretiva de pré-processador para evitar múltiplas inclusões do mesmo arquivo
+#include "raylib.h" // Inclui a biblioteca Raylib para manipulação de gráficos e entrada do usuário
 
+// Classe GameCamera representa a câmera do jogo, incluindo seu alvo, offset, rotação e zoom
 class GameCamera {
 
     public:
@@ -15,5 +17,5 @@ class GameCamera {
 
     private:
 
-        Camera2D _camera;
+        Camera2D _camera; // Camera2D do raylib, que contém as propriedades da câmera (offset, target, rotation, zoom)
 };

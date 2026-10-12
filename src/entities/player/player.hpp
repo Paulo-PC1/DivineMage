@@ -1,7 +1,9 @@
-#pragma once
-#include "raylib.h"
-#include "core/animation/animation.hpp"
+// DivineMage - Shooter/src/entities/player/player.hpp
+#pragma once // Diretiva de pré-processador para evitar múltiplas inclusões do mesmo arquivo
+#include "raylib.h" // Inclui a biblioteca Raylib para manipulação de gráficos e entrada do usuário
+#include "core/animation/animation.hpp" // Inclui a classe Animation para gerenciar animações do jogador
 
+// Classe Player representa o jogador no jogo, incluindo sua posição, velocidade, textura e animações
 class Player {
     
     public:
@@ -17,9 +19,8 @@ class Player {
         //Descarrega a textura do jogador
         void unload();
         
-        Vector2 getCenter() const;
-        
         //Getters
+        Vector2 getCenter() const;
         float getX() const;
         float getY() const;
     

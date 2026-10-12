@@ -103,3 +103,100 @@ Nome: Sprite Size
 Descrição: os tamanhos dos sprites do persoangem principal e inimigos base serão 32x32px, Já o Boss sera 64x64px
 Prioridade: ALTA
 Complexidade: MÉDIA
+
+## Estrutura de Pastas
+
+divinemage/
+├── CMakeLists.txt
+├── CompileComand.txt
+├── TODO.md
+├── .gitignore
+├── build/
+├── src/
+│   ├── main.cpp
+│   ├── core/
+|   |   ├── config/
+│   │   |   └── config.hpp
+|   |   ├── game/
+│   │   |   ├── game.hpp
+│   │   |   └── game.cpp
+|   |   ├── animation/
+│   │   |   ├── animation.hpp
+│   │   |   └──animation.cpp
+|   |   ├── camera/
+│   │   |   ├── camera.hpp
+│   │   |   └──camera.cpp
+|   |   ├── assets/
+│   │   |   ├── assets.hpp
+│   │       └── assets.cpp
+│   ├── screens/
+│   │   ├── screen/
+|   |   |   └── screen.hpp
+│   │   ├── menu_screen/
+|   |   |   └──menu_screen.hpp/.cpp
+│   │   ├── game_screen/
+|   |   |   └──game_screen.hpp/.cpp
+│   │   ├── game_over_screen/
+|   |   |   └── game_over_screen.hpp/.cpp
+│   │   ├──credits_screen.hpp/.cpp
+|   |       └──credits_screen.hpp/.cpp  
+│   ├── entities/
+|   |   ├── entity/
+│   │   |   └──entity.hpp/.cpp
+|   |   ├── actor/
+│   │   |   └──actor.hpp/.cpp
+|   |   ├── player/
+│   │   |   └── player.hpp/.cpp
+|   |   ├── enemy/
+│   │   |   └── enemy.hpp/.cpp
+|   |   ├── mini_boss/
+│   │   |   └──mini_boss.hpp/.cpp
+|   |   ├── pickup/
+│   │       └── pickup.hpp/.cpp
+│   ├── weapons/
+|   |   ├── weapon/
+│   │   |   └── weapon.hpp
+|   |   ├── staff/
+│   │   |   └── staff.hpp/.cpp
+|   |   ├── projectile/
+│   │       └── projectile.hpp/.cpp
+│   ├── potions/
+|   |   ├── potion/
+│   │   |   └── potion.hpp
+|   |   ├── health_potion
+│   │       └── health_potion.hpp/.cpp
+│   ├── systems/
+|   |   ├── collision/
+│   │       └── collision.hpp/.cpp
+│   ├── ui/
+|   |   ├── hud/
+│   │       └── hud.hpp/.cpp
+│   └── rooms/
+|   ├── tilemap/
+│   |   ├── tilemap.hpp/.cpp
+|   |   ├── room/
+│   |   |   └── room.hpp/.cpp
+|   |   ├── door/
+│   |   |   └──door.hpp/.cpp
+|   |   ├── world/
+│   |       └── world.hpp/.cpp
+├── assets/
+│   ├── sprites/
+|   |   ├── player/
+│   │   |   ├── Player.png
+│   │   |   ├── player_walking.png
+|   |   ├── hud/
+│   │   |   ├── heart.aseprite
+│   │   |   └── shield.aseprite
+|   |   ├── potions/
+|   |   ├── weapon/
+|   |   ├── enemy/
+│   ├── tilesets/
+│   │   ├── dungeon_tiles.png
+│   │   ├── dungeon_tiles.aseprite
+│   │   └── dungeon_boss_tiles.aseprite
+│   ├── maps/
+│   └── audio/
+└── docs/
+    ├── documentation.md
+    └── devlog.md

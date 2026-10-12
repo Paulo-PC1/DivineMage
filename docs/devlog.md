@@ -40,3 +40,7 @@ evitando comparações infinitad de estado.
 Atualizei parte do código do jogador para deixar mais genérico e não ter problemas em relação a animação do personagem
 
 Pedi para um Agente de IA agir como um Analista de Sistemas/Tech Lead Focado em POO e games para verificar possíveis erros no meu código,após ele auditar os erros fui corrigindo eles 1 a 1 com a ajuda do agente para verificar se estava condizente com os problemas auditados.
+
+## Dia 12/10/2026
+
+Fiz alguns ajustes em comentários e identação od código do game e a criação do arquivo de configuração (config.hpp) com um namespace para settar algumas constantes usadas no game todo.

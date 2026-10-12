@@ -1,6 +1,8 @@
+//DivineMage - Shooter/src/core/animation/animation.hpp
 #pragma once
 #include "raylib.h"
 
+// Classe Animation representa uma animação, incluindo sua textura, número total de frames, tempo de atualização e frame atual
 class Animation {
     
     public:

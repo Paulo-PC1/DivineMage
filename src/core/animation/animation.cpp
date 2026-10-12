@@ -1,3 +1,4 @@
+//DivineMage - Shooter/src/core/animation/animation.cpp
 #include "animation.hpp"
 
 // Cria a animação dividindo a textura pelo numero de sprites que ela possui
@@ -25,7 +26,9 @@ void Animation::update(float dt)
         _frameRec.x = _currentFrame * _frameWidth; // Atualiza a posição do retangulo para cortar a imagem
     }
 }
+
+// Retorna o retangulo para definir qual parte da imagem sera cortada
 Rectangle Animation::getFrameRec() const
 {
-    return _frameRec;
+    return _frameRec; // Retorna o retangulo para definir qual parte da imagem sera cortada
 }
