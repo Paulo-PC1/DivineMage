@@ -44,3 +44,7 @@ Pedi para um Agente de IA agir como um Analista de Sistemas/Tech Lead Focado em 
 ## Dia 12/10/2026
 
 Fiz alguns ajustes em comentários e identação od código do game e a criação do arquivo de configuração (config.hpp) com um namespace para settar algumas constantes usadas no game todo.
+
+## Dia 14/10/2026
+
+Fiz várias alterações no código, Criei as classes Game para controlar o loop do jogo, Screen e GameScreen para controlar as telas do jogo (apliquei conceitos iniciais e superficiais de herança e polimosfismo para fazer funcionar[necessário maior estudo para entendimento comlpeto]), Alterei o Main.cpp que agora contem apenas 3 linhas
