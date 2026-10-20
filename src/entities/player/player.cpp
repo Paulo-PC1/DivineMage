@@ -6,8 +6,8 @@
 Player::Player(float x, float y, float speed) :
     _x(x), _y(y), _speed(speed), // Inicializa a posição e velocidade do jogador com os valores fornecidos
      _facingLeft(false), _isMoving(false), // Inicializa as variáveis de direção e movimento do jogador como falso
-    _idleTexture(loadTexture(ASSETS_PATH "sprites/Player.png")), // Carrega a textura do jogador parado
-    _walkTexture(loadTexture(ASSETS_PATH "sprites/player_walking.png")), // Carrega a textura do jogador andando
+    _idleTexture(loadTexture(ASSETS_PATH "/sprites/player/Magu.png")), // Carrega a textura do jogador parado
+    _walkTexture(loadTexture(ASSETS_PATH "sprites/player/Magu_Walk.png")), // Carrega a textura do jogador andando
     _idleAnim(_idleTexture, 6, 0.2f),   // ajuste 6 pro total de frames real do seu novo Player.png
     _walkAnim(_walkTexture, 6, 0.15f)   // ajuste 6 pro total de frames real do player_walking.png
 {}
