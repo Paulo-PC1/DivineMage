@@ -48,3 +48,7 @@ Fiz alguns ajustes em comentários e identação od código do game e a criaçã
 ## Dia 14/10/2026
 
 Fiz várias alterações no código, Criei as classes Game para controlar o loop do jogo, Screen e GameScreen para controlar as telas do jogo (apliquei conceitos iniciais e superficiais de herança e polimosfismo para fazer funcionar[necessário maior estudo para entendimento comlpeto]), Alterei o Main.cpp que agora contem apenas 3 linhas
+
+## Dia 20/10/2026
+
+Adição do sprite oficial do personagem, Criei um parser de JSON para usar o tileset criado no Aseprite, agora é possível criar outras salas a partir do parser do tilemap criado.
