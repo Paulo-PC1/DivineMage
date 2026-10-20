@@ -33,6 +33,7 @@ class Player {
         float _speed; // Velocidade do jogador
         bool _facingLeft; // Variavel para verificar se jogador está olhando para esquerda
         bool _isMoving; // Variável para verificar se ogador está se movimentando
+        bool _wasMoving; // Variavel para verificar se o jogador esta se movendo
         Texture2D _idleTexture; // Textura do jogador parado (carrega Player.png 1 vez só)
         Texture2D _walkTexture; // Textura do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
         Animation _idleAnim; // Animação do jogador parado (carrega Player.png 1 vez só)

@@ -1,11 +1,12 @@
 //DivineMage - Shooter/src/entities/player/player.cpp
 #include "player.hpp" // Inclui o arquivo de cabeçalho da classe Player, que contém a declaração da classe e seus membros
 #include "raymath.h" // Inclui a biblioteca Raymath para operações matemáticas, como normalização de vetores e cálculo de comprimento de vetores
+#include "core/config/config.hpp" // Inclui o arquivo de cabealho da classe Config
 
 // Construtor, cria o jogador com posição inicial, velocidade e textura inicial
 Player::Player(float x, float y, float speed) :
     _x(x), _y(y), _speed(speed), // Inicializa a posição e velocidade do jogador com os valores fornecidos
-     _facingLeft(false), _isMoving(false), // Inicializa as variáveis de direção e movimento do jogador como falso
+     _facingLeft(false), _isMoving(false), _wasMoving(false), // Inicializa as variáveis de direção e movimento do jogador como falso
     _idleTexture(loadTexture(ASSETS_PATH "/sprites/player/Magu.png")), // Carrega a textura do jogador parado
     _walkTexture(loadTexture(ASSETS_PATH "sprites/player/Magu_Walk.png")), // Carrega a textura do jogador andando
     _idleAnim(_idleTexture, 6, 0.2f),   // ajuste 6 pro total de frames real do seu novo Player.png
@@ -58,17 +59,15 @@ void Player::update(float dt)
         if (direction.x != 0) _facingLeft = (direction.x < 0);
     }
     
-    // Atualiza a animação do jogador com base no estado de movimento
-    static bool wasMoving = false;
-    if (_isMoving && !wasMoving) // Se o jogador começou a se mover, reseta a animação de caminhada
+    if (_isMoving && !_wasMoving) // Se o jogador começou a se mover, reseta a animação de caminhada
     { 
         _walkAnim.reset(); // Reseta a animação do jogador andando para o frame inicial
     }
-    if (!_isMoving && wasMoving) // Se o jogador parou de se mover, reseta a animação de parada
+    if (!_isMoving && _wasMoving) // Se o jogador parou de se mover, reseta a animação de parada
     {  
         _idleAnim.reset(); // Reseta a animação do jogador parado para o frame inicial
     }
-    wasMoving = _isMoving; // Atualiza o estado de movimento anterior para a próxima atualização
+    _wasMoving = _isMoving; // Atualiza o estado de movimento anterior para a próxima atualização
     
     // Atualiza a animação do jogador com base no estado de movimento
     if(_isMoving) 
@@ -108,8 +107,8 @@ Vector2 Player::getCenter() const
 {
     // _idleTexture.width já reflete o x3 do redimensionamento
     return {
-        _x + _idleTexture.width / 2.0f, // Calcula a coordenada x do centro do jogador adicionando metade da largura da textura à posição x
-        _y + _idleTexture.height / 2.0f // Calcula a coordenada y do centro do jogador adicionando metade da altura da textura à posição y
+        _x + Config::SPRITE_SIZE / 2.0f, // Calcula a coordenada x do centro do jogador adicionando metade da largura da textura à posição x
+        _y + Config::SPRITE_SIZE / 2.0f // Calcula a coordenada y do centro do jogador adicionando metade da altura da textura à posição y
     };
 }
 
