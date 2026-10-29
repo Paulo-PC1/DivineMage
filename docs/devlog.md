@@ -60,3 +60,5 @@ Mudanças menores, preparação para criar sistema de Colisões
 Teste inicial para sistema de colisoes e hiboxes
 
 Hitbox com as paredes feitas jogador não atravessa mais as paredes do mapa
+
+Camera centralizada no jogador e mapa agora não aparece masi telas pretas do fundo e adição de comentários para a implementação da classe do tilemap

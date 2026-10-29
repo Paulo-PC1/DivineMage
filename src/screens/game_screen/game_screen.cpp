@@ -11,6 +11,9 @@ GameScreen::GameScreen() : _player(320.0f, 192.0f, 85.0f),
     {
         TraceLog(LOG_ERROR, "GameScreen: nao carregou a sala 1");
     }
+
+    // Informa à câmera o tamanho da sala (640 x 384 px)
+    _camera.setBounds((float)_tilemap.getPixelWidth(), (float)_tilemap.getPixelHeight());
 }
     
 // Destrutor da classe GameScreen, responsável por liberar recursos alocados para o jogador e a câmera do jogo.

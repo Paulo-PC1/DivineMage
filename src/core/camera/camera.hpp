@@ -11,6 +11,9 @@ class GameCamera {
 
         //Atualiza o alvo da câmera para seguir uma posição (ex: o jogador)
         void follow(Vector2 target);
+                
+        //Define o tamanho do mundo (da sala) em pixels, para a câmera não mostrar nada fora dele
+        void setBounds(float worldWidth, float worldHeight);
 
         //Getter: devolve a Camera2D "crua" do raylib, pronta pra BeginMode2D
         Camera2D get() const;
@@ -18,4 +21,6 @@ class GameCamera {
     private:
 
         Camera2D _camera; // Camera2D do raylib, que contém as propriedades da câmera (offset, target, rotation, zoom)
+        float _worldWidth; // Largura da sala em pixels (0 = limites ainda não definidos)
+        float _worldHeight; // Altura da sala em pixels (0 = limites ainda não definidos)
 };
