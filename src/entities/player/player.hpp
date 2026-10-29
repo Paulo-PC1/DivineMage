@@ -21,6 +21,7 @@ class Player {
         
         //Getters
         Vector2 getCenter() const;
+        Rectangle getHitbox() const;
         float getX() const;
         float getY() const;
     

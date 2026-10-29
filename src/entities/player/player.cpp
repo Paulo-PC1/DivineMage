@@ -112,6 +112,16 @@ Vector2 Player::getCenter() const
     };
 }
 
+Rectangle Player::getHitbox() const
+{
+    return {
+        _x + Config::OFFSETX,
+        _y + Config::OFFSETY, 
+        Config::WIDTH, 
+        Config::HEIGHT
+    };
+}
+
 // Getters
 float Player::getX() const 
 { 

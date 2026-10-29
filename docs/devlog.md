@@ -54,3 +54,7 @@ Fiz várias alterações no código, Criei as classes Game para controlar o loop
 Adição do sprite oficial do personagem, Criei um parser de JSON para usar o tileset criado no Aseprite, agora é possível criar outras salas a partir do parser do tilemap criado.
 
 Mudanças menores, preparação para criar sistema de Colisões
+
+## Dia 29/10/2026
+
+Teste inicial para sistema de colisoes e hiboxes

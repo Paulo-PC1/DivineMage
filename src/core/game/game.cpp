@@ -8,6 +8,7 @@
 
 Game::Game() : _currentScreen(nullptr), _shouldClose(false) // Inicializa ponteiro e variavel de controle da tela atual do jogo e da janela do jogo
 {
+    ChangeDirectory(GetApplicationDirectory()); // Antes de carregar qualquer arquivo
     InitWindow(Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, Config::WINDOW_TITLE); // Inicializa a janela do jogo com largura 1280, altura 720 e título "DivineMage"
     SetTargetFPS(Config::TARGET_FPS); // Define a taxa de quadros por segundo (FPS) para 60, garantindo uma atualização suave da tela e dos elementos do jogo.
     changeScreen(ScreenType::GAMEPLAY); // Define a tela inicial do jogo como a tela de gameplay, permitindo que o jogador comece a jogar imediatamente.
@@ -45,7 +46,7 @@ void Game::update(float dt) // Atualiza estado do jogo
 void Game::draw() // Desenha elementos do jogo na tela
 {
     BeginDrawing(); // Inicia o desenho na tela
-    ClearBackground(RAYWHITE); // Limpa a tela com a cor selecionada
+    ClearBackground(BLACK); // Limpa a tela com a cor selecionada
 
     if (_currentScreen)
     {
