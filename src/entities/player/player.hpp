@@ -1,6 +1,7 @@
 // DivineMage - Shooter/src/entities/player/player.hpp
 #pragma once // Diretiva de pré-processador para evitar múltiplas inclusões do mesmo arquivo
 #include "raylib.h" // Inclui a biblioteca Raylib para manipulação de gráficos e entrada do usuário
+#include <vector> // inclui a biblioteca Vector para uso de vetores e listas dinâmicas
 #include "core/animation/animation.hpp" // Inclui a classe Animation para gerenciar animações do jogador
 
 // Classe Player representa o jogador no jogo, incluindo sua posição, velocidade, textura e animações
@@ -11,7 +12,7 @@ class Player {
         explicit Player(float x, float y, float speed);
         
         //Atualiza o movimento e a textura do jogador
-        void update (float dt);
+        void update (float dt, const std::vector<Rectangle> &walls);
         
         //Desenha o jogador na tela
         void draw() const;
@@ -28,6 +29,7 @@ class Player {
     private:
     
         Texture2D loadTexture(const char *filePath); // Carrega a textura do jogador
+        bool collidesWithWalls(const std::vector<Rectangle> &walls) const; // Verifica se colidiu com paredes sem copias e sem modificação
     
         float _x; // Posição do jogador no eixo x
         float _y; // Posição do jogador no eixo y
@@ -40,5 +42,10 @@ class Player {
         Animation _idleAnim; // Animação do jogador parado (carrega Player.png 1 vez só)
         Animation _walkAnim; // Animação do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
         
+        //Constantes da classe
+        static constexpr float OFFSETX = 9.0f; // Constantes provisórias para calculo de hitbox
+        static constexpr float OFFSETY = 16.0f; // Constantes provisórias para calculo de hitbox
+        static constexpr float WIDTH = 14.0f; // Constantes provisórias para calculo de hitbox
+        static constexpr float HEIGHT = 16.0f; // Constantes provisórias para calculo de hitbox
 };
 

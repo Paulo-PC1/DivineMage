@@ -20,8 +20,4 @@ namespace Config {
     //Sprites
     constexpr int SPRITE_SIZE = 32; // Constante para definir o tamanho do sprite (32 pixels)
     constexpr int BOSS_SIZE = 64; // Constante para definir o tamanho do boss (64 pixels)
-    constexpr float OFFSETX = 10.0f; // Constantes provisórias para calculo de hitbox
-    constexpr float OFFSETY = 14.0f; // Constantes provisórias para calculo de hitbox
-    constexpr float WIDTH = 20.0f; // Constantes provisórias para calculo de hitbox
-    constexpr float HEIGHT = 16.0f; // Constantes provisórias para calculo de hitbox
 }

@@ -58,3 +58,5 @@ Mudanças menores, preparação para criar sistema de Colisões
 ## Dia 29/10/2026
 
 Teste inicial para sistema de colisoes e hiboxes
+
+Hitbox com as paredes feitas jogador não atravessa mais as paredes do mapa

@@ -12,7 +12,7 @@ GameScreen::GameScreen() : _player(320.0f, 192.0f, 85.0f),
         TraceLog(LOG_ERROR, "GameScreen: nao carregou a sala 1");
     }
 }
-
+    
 // Destrutor da classe GameScreen, responsável por liberar recursos alocados para o jogador e a câmera do jogo.
 GameScreen::~GameScreen() 
 {
@@ -23,7 +23,7 @@ GameScreen::~GameScreen()
 ScreenType GameScreen::update(float dt) 
 {
     
-    _player.update(dt); // Atualiza o estado do jogador, incluindo a lógica de movimentação, colisões e outros elementos.
+    _player.update(dt, _tilemap.getWallRects()); // Atualiza o estado do jogador, incluindo a lógica de movimentação, colisões e outros elementos.
     _camera.follow(_player.getCenter()); // Atualiza a posição da câmera para seguir o jogador.
 
     return ScreenType::NONE; // Retorna NONE para indicar que não há mudança de tela.
@@ -34,7 +34,6 @@ void GameScreen::draw()
     
     BeginMode2D(_camera.get()); // Inicia o modo 2D com a câmera definida.
         _tilemap.draw(); // Primeiro o mapa, para o jogador aparecer por cima
-        DrawRectangleLinesEx(_player.getHitbox(), 1.0f, PURPLE);
         _player.draw(); // Desenha o jogador na tela.
     EndMode2D(); // Encerra o modo 2D com a câmera definida.
 

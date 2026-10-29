@@ -7,7 +7,7 @@
 Player::Player(float x, float y, float speed) :
     _x(x), _y(y), _speed(speed), // Inicializa a posição e velocidade do jogador com os valores fornecidos
      _facingLeft(false), _isMoving(false), _wasMoving(false), // Inicializa as variáveis de direção e movimento do jogador como falso
-    _idleTexture(loadTexture(ASSETS_PATH "/sprites/player/Magu.png")), // Carrega a textura do jogador parado
+    _idleTexture(loadTexture(ASSETS_PATH "sprites/player/Magu.png")), // Carrega a textura do jogador parado
     _walkTexture(loadTexture(ASSETS_PATH "sprites/player/Magu_Walk.png")), // Carrega a textura do jogador andando
     _idleAnim(_idleTexture, 6, 0.2f),   // ajuste 6 pro total de frames real do seu novo Player.png
     _walkAnim(_walkTexture, 6, 0.15f)   // ajuste 6 pro total de frames real do player_walking.png
@@ -23,8 +23,24 @@ Texture2D Player::loadTexture(const char *filePath)
     return texture; // Retorna a textura carregada
 }
 
-// Atualiza o movimento e a textura do jogador
-void Player::update(float dt) 
+// Verifica se colidiu com paredes sem copias e sem modificação
+bool Player::collidesWithWalls(const std::vector<Rectangle> &walls) const
+{
+   Rectangle hitbox =  getHitbox(); // Pega a hitbox 1 unica vez na posição atual
+   
+   for( const Rectangle &wall : walls)  // Percorre o retângulo da parede
+   {
+        if(CheckCollisionRecs(hitbox, wall)) // Se hitbox sobrepor a parede
+        { 
+            return true; // Retorna true (não precisa verificar outras)
+        }
+   }
+   
+   return false;  // Percorreu todas e nenhuma bateu
+}
+
+// Atualiza o movimento, colisão e a textura do jogador
+void Player::update(float dt, const std::vector<Rectangle> &walls) 
 {
     _isMoving = false; // Reseta a variável de movimento para falso no início da atualização
 
@@ -51,8 +67,19 @@ void Player::update(float dt)
     if (Vector2Length(direction) > 0) 
     {
         direction = Vector2Normalize(direction); // Normaliza o vetor de direção para que sua magnitude seja 1, garantindo movimento uniforme em todas as direções
+        float oldPosX = _x; // guarda a posição atual(antiga) do player
         _x += direction.x * _speed * dt; // Atualiza a posição do jogador no eixo x com base na direção, velocidade e delta time
+        if(collidesWithWalls(walls)) // Verifica se teve colisão
+        {
+            _x = oldPosX; // retorna a posição antiga para o membro da classe
+        }
+        
+        float oldPosY = _y; // guarda a posição atual(antiga) do player
         _y += direction.y * _speed * dt; // Atualiza a posição do jogador no eixo y com base na direção, velocidade e delta time
+        if (collidesWithWalls(walls)) // Verifica se teve colisão
+        {
+            _y = oldPosY; // retorna a posição antiga para o membro da classe
+        }
         _isMoving = true; // Atualiza a variável de movimento para verdadeiro, indicando que o jogador está se movendo
         
         // Atualiza a direção que o jogador está olhando com base na direção do movimento
@@ -105,7 +132,7 @@ void Player::unload()
 
 Vector2 Player::getCenter() const 
 {
-    // _idleTexture.width já reflete o x3 do redimensionamento
+    // _idleTexture.width já reflete centro do frame (32x32)
     return {
         _x + Config::SPRITE_SIZE / 2.0f, // Calcula a coordenada x do centro do jogador adicionando metade da largura da textura à posição x
         _y + Config::SPRITE_SIZE / 2.0f // Calcula a coordenada y do centro do jogador adicionando metade da altura da textura à posição y
@@ -115,10 +142,10 @@ Vector2 Player::getCenter() const
 Rectangle Player::getHitbox() const
 {
     return {
-        _x + Config::OFFSETX,
-        _y + Config::OFFSETY, 
-        Config::WIDTH, 
-        Config::HEIGHT
+        _x + OFFSETX,
+        _y + OFFSETY, 
+        WIDTH, 
+        HEIGHT
     };
 }
 
