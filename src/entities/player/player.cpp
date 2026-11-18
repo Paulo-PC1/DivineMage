@@ -1,17 +1,31 @@
 //DivineMage - Shooter/src/entities/player/player.cpp
-#include "player.hpp" // Inclui o arquivo de cabeçalho da classe Player, que contém a declaração da classe e seus membros
+#include "entities/player/player.hpp" // Inclui o arquivo de cabeçalho da classe Player, que contém a declaração da classe e seus membros
 #include "raymath.h" // Inclui a biblioteca Raymath para operações matemáticas, como normalização de vetores e cálculo de comprimento de vetores
-#include "core/config/config.hpp" // Inclui o arquivo de cabealho da classe Config
+
+//namespace para constantes do jogador
+namespace {
+    constexpr float HITBOX_OFFSET_X = 9.0f;
+    constexpr float HITBOX_OFFSET_Y = 16.0f;
+    constexpr float HITBOX_WIDTH    = 14.0f;
+    constexpr float HITBOX_HEIGHT   = 16.0f;
+    constexpr int   MAX_HEALTH      = 100; 
+    constexpr float INVULNERABILITY_DURATION = 0.5f; // Duração da invulnerabilidade em segundos
+}
 
 // Construtor, cria o jogador com posição inicial, velocidade e textura inicial
 Player::Player(float x, float y, float speed) :
-    _x(x), _y(y), _speed(speed), // Inicializa a posição e velocidade do jogador com os valores fornecidos
-     _facingLeft(false), _isMoving(false), _wasMoving(false), // Inicializa as variáveis de direção e movimento do jogador como falso
+    Actor(x, y, HITBOX_OFFSET_X, HITBOX_OFFSET_Y, HITBOX_WIDTH, HITBOX_HEIGHT, speed, MAX_HEALTH), // Inicializa a posição e velocidade do jogador com os valores fornecidos
+    _facingLeft(false), _isMoving(false), _wasMoving(false), // Inicializa as variáveis de direção e movimento do jogador como falso
     _idleTexture(loadTexture(ASSETS_PATH "sprites/player/Magu.png")), // Carrega a textura do jogador parado
     _walkTexture(loadTexture(ASSETS_PATH "sprites/player/Magu_Walk.png")), // Carrega a textura do jogador andando
     _idleAnim(_idleTexture, 6, 0.2f),   // ajuste 6 pro total de frames real do seu novo Player.png
     _walkAnim(_walkTexture, 6, 0.15f)   // ajuste 6 pro total de frames real do player_walking.png
-{}
+    // _staff não aparece: usa o construtor padrão do Staff
+{
+    // _invulnerabilityDuration é membro da BASE, e a lista de inicialização só inicia membros da própria classe.
+    // Por isso ele é ajustado aqui, no corpo do construtor (o Actor o iniciou com 0)
+    _invulnerabilityDuration = INVULNERABILITY_DURATION;
+}
 
 
 // Carrega a textura do jogador, redimensiona e inverte a imagem se necessário
@@ -21,22 +35,6 @@ Texture2D Player::loadTexture(const char *filePath)
     Texture2D texture = LoadTexture(filePath); // Carrega a textura do jogador
     SetTextureFilter(texture, TEXTURE_FILTER_POINT); // Define o filtro de textura para ponto, garantindo que a textura seja renderizada com pixels nítidos, sem suavização
     return texture; // Retorna a textura carregada
-}
-
-// Verifica se colidiu com paredes sem copias e sem modificação
-bool Player::collidesWithWalls(const std::vector<Rectangle> &walls) const
-{
-   Rectangle hitbox =  getHitbox(); // Pega a hitbox 1 unica vez na posição atual
-   
-   for( const Rectangle &wall : walls)  // Percorre o retângulo da parede
-   {
-        if(CheckCollisionRecs(hitbox, wall)) // Se hitbox sobrepor a parede
-        { 
-            return true; // Retorna true (não precisa verificar outras)
-        }
-   }
-   
-   return false;  // Percorreu todas e nenhuma bateu
 }
 
 // Atualiza o movimento, colisão e a textura do jogador
@@ -67,23 +65,12 @@ void Player::update(float dt, const std::vector<Rectangle> &walls)
     if (Vector2Length(direction) > 0) 
     {
         direction = Vector2Normalize(direction); // Normaliza o vetor de direção para que sua magnitude seja 1, garantindo movimento uniforme em todas as direções
-        float oldPosX = _x; // guarda a posição atual(antiga) do player
-        _x += direction.x * _speed * dt; // Atualiza a posição do jogador no eixo x com base na direção, velocidade e delta time
-        if(collidesWithWalls(walls)) // Verifica se teve colisão
-        {
-            _x = oldPosX; // retorna a posição antiga para o membro da classe
-        }
+        Vector2 displacement = Vector2Scale(direction, _speed * dt); // Calcula o deslocamento do jogador multiplicando a direção normalizada pela velocidade e pelo delta time (dt)
+        moveWithCollision(displacement, walls); // Move o jogador com colisão, verificando se há paredes no caminho e ajustando a posição do jogador conforme necessário
         
-        float oldPosY = _y; // guarda a posição atual(antiga) do player
-        _y += direction.y * _speed * dt; // Atualiza a posição do jogador no eixo y com base na direção, velocidade e delta time
-        if (collidesWithWalls(walls)) // Verifica se teve colisão
-        {
-            _y = oldPosY; // retorna a posição antiga para o membro da classe
-        }
-        _isMoving = true; // Atualiza a variável de movimento para verdadeiro, indicando que o jogador está se movendo
-        
-        // Atualiza a direção que o jogador está olhando com base na direção do movimento
-        if (direction.x != 0) _facingLeft = (direction.x < 0);
+        // Atualiza o estado de movimento e a direção do jogador com base na direção do movimento
+        _isMoving = true;
+        if (direction.x != 0) _facingLeft = (direction.x < 0); // 
     }
     
     if (_isMoving && !_wasMoving) // Se o jogador começou a se mover, reseta a animação de caminhada
@@ -104,11 +91,20 @@ void Player::update(float dt, const std::vector<Rectangle> &walls)
     {
         _idleAnim.update(dt); // Atualiza a animação do jogador parado
     }
+    
+    updateInvulnerability(dt); // Desconta o tempo da invulnerabilidade (método do Actor)
+    _staff.update(dt);         // [ARMA] Desconta o cooldown do cajado
 }
 
 // Desenha o jogador na tela
 void Player::draw() const
 {
+    // Opcional: pisca enquanto está invulnerável (apague estas 4 linhas se não quiser o efeito)
+    if (isInvulnerable() && (int)(GetTime() * 10.0) % 2 == 0)
+    {
+        return; // não desenha neste instante, o que cria o piscar
+    }
+    
     const Animation &anim = _isMoving ? _walkAnim : _idleAnim; // Se animação atual for igual a se mover carrega a walkAnim se não a IdleAnim
     Texture2D currentTexture = _isMoving ? _walkTexture : _idleTexture; // Se textura atual for igual a se mover carrega a walkTexture se não a IdleTexture
     
@@ -121,6 +117,26 @@ void Player::draw() const
     DrawTextureRec(currentTexture, sourceRec, Vector2{ _x, _y}, WHITE);
     
 }
+
+// [ARMA] Atira o cajado na direção do ponto de mira (em coordenadas do mundo)
+void Player::shoot(Vector2 aimWorldPosition, std::vector<Projectile> &projectiles)
+{
+    if (!_staff.canShoot())
+    {
+        return; // ainda em cooldown
+    }
+
+    Vector2 origin = getCenter(); // de onde o tiro sai (centro do hitbox, vindo do Entity)
+    Vector2 direction = Vector2Subtract(aimWorldPosition, origin);
+
+    if (Vector2Length(direction) < 0.001f)
+    {
+        return; // mouse exatamente no centro: não existe direção para normalizar
+    }
+
+    direction = Vector2Normalize(direction);
+    _staff.shoot(origin, direction, projectiles);
+}
  
 // Descarrega a textura do jogador
 void Player::unload() 
@@ -128,34 +144,4 @@ void Player::unload()
     UnloadTexture(_idleTexture); // Descarrega a textura do jogador parado da memoria
     UnloadTexture(_walkTexture); // Descarrega a textura do jogador andando da memoria
 
-}
-
-Vector2 Player::getCenter() const 
-{
-    // _idleTexture.width já reflete centro do frame (32x32)
-    return {
-        _x + Config::SPRITE_SIZE / 2.0f, // Calcula a coordenada x do centro do jogador adicionando metade da largura da textura à posição x
-        _y + Config::SPRITE_SIZE / 2.0f // Calcula a coordenada y do centro do jogador adicionando metade da altura da textura à posição y
-    };
-}
-
-Rectangle Player::getHitbox() const
-{
-    return {
-        _x + OFFSETX,
-        _y + OFFSETY, 
-        WIDTH, 
-        HEIGHT
-    };
-}
-
-// Getters
-float Player::getX() const 
-{ 
-    return _x;  
-}
-
-float Player::getY() const 
-{
-    return _y;
 }

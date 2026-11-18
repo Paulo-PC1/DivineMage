@@ -14,7 +14,7 @@ public:
     TileMap();
     
     // Destrutor da classe
-    ~TileMap() = default;
+    ~TileMap();
     
     TileMap(const TileMap &) = delete;
     

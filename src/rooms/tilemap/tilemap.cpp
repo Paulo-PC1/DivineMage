@@ -12,6 +12,11 @@ TileMap::TileMap() : _width(0), _height(0), _tileSize(0), _firstGid(0), _columns
     
 }
 
+TileMap::~TileMap() // Destrutor, chamado quando o objeto é destruído (fim do jogo ou troca de sala)
+{
+    unload(); // Descarrega a textura do tileset da memória da GPU, se houver alguma carregada
+}
+
 // Carrega o mapa: lê o JSON (tamanho e camadas), monta os retângulos de colisão e carrega a textura do tileset
 // Devolve true se tudo deu certo e false se qualquer etapa falhar (o motivo é registrado no log)
 bool TileMap::load(const std::string &jsonPath, const std::string &tilesetPath)
