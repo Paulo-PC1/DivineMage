@@ -66,3 +66,7 @@ Camera centralizada no jogador e mapa agora não aparece masi telas pretas do fu
 ## Dia 01/11/2026 - 18/11/2026
 
 Criação de todos os arquivos de cabeçalho(.hpp) e inicio da implementação das classes (.cpp)
+
+## Dia 18/11/2026
+
+Adição das implementações das classes Actor e teste de validação do game (gameplay fica igual a estado que estava sem herança)

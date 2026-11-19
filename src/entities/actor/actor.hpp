@@ -8,11 +8,11 @@ class Actor : public Entity {
 public:
     
     // Construtor da classe Actor, que herda de Entity e adiciona atributos específicos para atores, como velocidade e saúde máxima
-    Actor(float x, float y, float hitboxOffSetX, float hitboxOffSetY, float hitboxWidth, float hitboxHeight, float speed, float maxHealth);
+    Actor(float x, float y, float hitboxOffSetX, float hitboxOffSetY, float hitboxWidth, float hitboxHeight, float speed, int maxHealth);
     
     void takeDamage(int amount); // Método que ignora se estiver invulnerável; senão reduz a vida
     void heal(int amount); // Método que aumenta a vida, sem ultrapassar a vida máxima
-    bool idDead() const; // Método para retornar se ator esta morto ou não
+    bool isDead() const; // Método para retornar se ator esta morto ou não
     bool isInvulnerable() const; // Método para retornar se ator esta invulnerável ou não (pisca quando toma dano)
     int getHealth() const; // Método para retornar a vida atual do ator
     int getMaxHealth() const; // Método para retornar a vida máxima do ator
