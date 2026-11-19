@@ -2,8 +2,8 @@
 #pragma once // Diretiva de pré-processador para evitar múltiplas inclusões do mesmo arquivo
 #include "entities/actor/actor.hpp" // Inclui a classe Actor, que é a classe base para o jogador
 #include "core/animation/animation.hpp" // Inclui a classe Animation para gerenciar animações do jogador
-//#include "weapons/staff/staff.hpp" // Inclui a classe Staff para gerenciar armas do jogador
-//#include "weapons/projectile/projectile.hpp" // Inclui a classe Projectile para gerenciar projéteis disparados pelo jogador
+#include "weapons/staff/staff.hpp" // Inclui a classe Staff para gerenciar armas do jogador
+#include "weapons/projectile/projectile.hpp" // Inclui a classe Projectile para gerenciar projéteis disparados pelo jogador
 
 // Classe Player representa o jogador no jogo, incluindo sua posição, velocidade, textura e animações
 class Player : public Actor {
@@ -22,7 +22,7 @@ class Player : public Actor {
         void unload();
         
         // A GameScreen converte o mouse para coordenadas do mundo (precisa da câmera)
-        //void shoot(Vector2 aimWorldPosition, std::vector<Projectile> &projectiles);
+        void shoot(Vector2 aimWorldPosition, std::vector<Projectile> &projectiles);
         
     private:
     
@@ -35,6 +35,6 @@ class Player : public Actor {
         Texture2D _walkTexture; // Textura do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
         Animation _idleAnim; // Animação do jogador parado (carrega Player.png 1 vez só)
         Animation _walkAnim; // Animação do jogador andando (carrega player_walking.png 1 vez só, sempre olhando para direita)
-        //Staff _staff; // Arma do jogador (carrega staff.png 1 vez só)        
+        Staff _staff; // Arma do jogador (carrega staff.png 1 vez só)        
 };
 

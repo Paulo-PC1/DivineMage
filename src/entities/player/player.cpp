@@ -93,7 +93,7 @@ void Player::update(float dt, const std::vector<Rectangle> &walls)
     }
     
     updateInvulnerability(dt); // Desconta o tempo da invulnerabilidade (método do Actor)
-    //_staff.update(dt);         // [ARMA] Desconta o cooldown do cajado
+    _staff.update(dt);         // [ARMA] Desconta o cooldown do cajado
 }
 
 // Desenha o jogador na tela
@@ -119,24 +119,24 @@ void Player::draw() const
 }
 
 // [ARMA] Atira o cajado na direção do ponto de mira (em coordenadas do mundo)
-// void Player::shoot(Vector2 aimWorldPosition, std::vector<Projectile> &projectiles)
-// {
-//     if (!_staff.canShoot())
-//     {
-//         return; // ainda em cooldown
-//     }
+void Player::shoot(Vector2 aimWorldPosition, std::vector<Projectile> &projectiles)
+{
+    if (!_staff.canShoot())
+    {
+        return; // ainda em cooldown
+    }
 
-//     Vector2 origin = getCenter(); // de onde o tiro sai (centro do hitbox, vindo do Entity)
-//     Vector2 direction = Vector2Subtract(aimWorldPosition, origin);
+    Vector2 origin = getCenter(); // de onde o tiro sai (centro do hitbox, vindo do Entity)
+    Vector2 direction = Vector2Subtract(aimWorldPosition, origin);
 
-//     if (Vector2Length(direction) < 0.001f)
-//     {
-//         return; // mouse exatamente no centro: não existe direção para normalizar
-//     }
+    if (Vector2Length(direction) < 0.001f)
+    {
+        return; // mouse exatamente no centro: não existe direção para normalizar
+    }
 
-//     direction = Vector2Normalize(direction);
-//     _staff.shoot(origin, direction, projectiles);
-// }
+    direction = Vector2Normalize(direction);
+    _staff.shoot(origin, direction, projectiles);
+}
  
 // Descarrega a textura do jogador
 void Player::unload() 
