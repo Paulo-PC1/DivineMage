@@ -13,6 +13,7 @@ Game::Game() : _currentScreen(nullptr), _shouldClose(false) // Inicializa pontei
 {
     ChangeDirectory(GetApplicationDirectory()); // Antes de carregar qualquer arquivo
     InitWindow(Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, Config::WINDOW_TITLE); // Inicializa a janela do jogo com largura 1280, altura 720 e título "DivineMage"
+    InitAudioDevice(); // Inicializa o recurso de audio para as musicas
     SetTargetFPS(Config::TARGET_FPS); // Define a taxa de quadros por segundo (FPS) para 60, garantindo uma atualização suave da tela e dos elementos do jogo.
     SetExitKey(KEY_NULL); // Desliga o ESC como tecla de fechar a janela (por padrão o raylib fecha o jogo com ESC), para as telas poderem usar o ESC
     changeScreen(ScreenType::MAIN_MENU); // Define a tela inicial do jogo como o menu principal.
@@ -21,6 +22,7 @@ Game::Game() : _currentScreen(nullptr), _shouldClose(false) // Inicializa pontei
 Game::~Game() // Destrutor da classe Game, responsável por fechar a janela do jogo e liberar recursos alocados.
 {
     delete _currentScreen; // Libera a memória alocada para a tela atual do jogo, evitando vazamentos de memória.
+    CloseAudioDevice(); // Fecha o dispositivo de audio das músicas
     CloseWindow(); // Fecha a janela do jogo e libera os recursos alocados.
 }
 

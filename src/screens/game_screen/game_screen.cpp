@@ -8,6 +8,11 @@
 GameScreen::GameScreen() : _player(0.0f, 0.0f, 85.0f), // A posição de verdade vem da sala (logo abaixo, no corpo do construtor)
     _camera(_player.getCenter(), { Config::SCREEN_WIDTH / 2, Config::SCREEN_HEIGHT / 2 }, 0.0f, Config::CAMERA_ZOOM)
 {
+    _gameMusic.load(ASSETS_PATH "audio/music/gameplay.mp3");
+    _bossMusic.load(ASSETS_PATH "audio/music/boss.mp3");
+    _gameMusic.setVolume(0.5f);
+    _bossMusic.setVolume(0.6f);
+    _gameMusic.play();
     // Carrega as 3 salas (mapas, inimigos, portas e loot)
     if (!_world.load())
     {
@@ -49,6 +54,21 @@ ScreenType GameScreen::update(float dt)
     }
 
     _world.update(dt, _player); // Atualiza a sala: inimigos, projéteis, loot e troca de sala nas portas
+    _gameMusic.update();
+    _bossMusic.update();
+
+    bool inBoss = _world.isInBossRoom();
+    if (inBoss && !_inBossRoom)        // acabou de entrar na sala do boss
+    {
+        _gameMusic.stop();
+        _bossMusic.play();
+    }
+    else if (!inBoss && _inBossRoom)   // voltou para a sala anterior
+    {
+        _bossMusic.stop();
+        _gameMusic.play();
+    }
+    _inBossRoom = inBoss;
 
     // A sala pode ter mudado no update acima, então pega a sala atual de novo
     Room &currentRoom = _world.getCurrentRoom();

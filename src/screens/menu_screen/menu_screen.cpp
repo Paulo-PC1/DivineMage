@@ -28,13 +28,18 @@ MenuScreen::MenuScreen() :
     _playButton{    (Config::SCREEN_WIDTH - BUTTON_WIDTH) / 2.0f, 320.0f, BUTTON_WIDTH, BUTTON_HEIGHT },
     _creditsButton{ (Config::SCREEN_WIDTH - BUTTON_WIDTH) / 2.0f, 320.0f + (BUTTON_HEIGHT + BUTTON_SPACING), BUTTON_WIDTH, BUTTON_HEIGHT },
     _exitButton{    (Config::SCREEN_WIDTH - BUTTON_WIDTH) / 2.0f, 320.0f + 2.0f * (BUTTON_HEIGHT + BUTTON_SPACING), BUTTON_WIDTH, BUTTON_HEIGHT }
+
 {
     // Nada a fazer aqui: tudo já foi inicializado na lista acima
+    _music.load(ASSETS_PATH "audio/music/menu.mp3");
+    _music.setVolume(0.5f);
+    _music.play();
 }
 
 // Devolve para onde o jogo deve ir (NONE = continuar no menu)
 ScreenType MenuScreen::update(float)
 {
+    _music.update();
     if (IsKeyPressed(KEY_ENTER)) // Atalho: ENTER também inicia o jogo
     {
         return ScreenType::GAMEPLAY;

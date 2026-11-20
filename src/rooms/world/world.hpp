@@ -16,6 +16,8 @@ public:
 
     Room &getCurrentRoom();                 // a GameScreen precisa das paredes e dos projéteis
     bool isBossDefeated() const;            // dispara a tela de créditos
+    
+    bool isInBossRoom() const; // Verifica se esta na sala do boss
 
 private:
     void changeRoom(int index, Vector2 spawn, Player &player);

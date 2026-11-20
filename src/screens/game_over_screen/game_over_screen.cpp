@@ -27,13 +27,18 @@ namespace {
 GameOverScreen::GameOverScreen() :
     _retryButton{ (Config::SCREEN_WIDTH - BUTTON_WIDTH) / 2.0f, 340.0f, BUTTON_WIDTH, BUTTON_HEIGHT },
     _menuButton{  (Config::SCREEN_WIDTH - BUTTON_WIDTH) / 2.0f, 340.0f + (BUTTON_HEIGHT + BUTTON_SPACING), BUTTON_WIDTH, BUTTON_HEIGHT }
+
 {
     // Nada a fazer aqui: tudo já foi inicializado na lista acima
+    _music.load(ASSETS_PATH "audio/music/game_over.mp3");
+    _music.setVolume(0.5f);
+    _music.play();
 }
 
 // Devolve para onde o jogo deve ir (NONE = continuar nesta tela)
 ScreenType GameOverScreen::update(float)
 {
+    _music.update();
     if (IsKeyPressed(KEY_ENTER)) // Atalho: ENTER tenta de novo
     {
         return ScreenType::GAMEPLAY;

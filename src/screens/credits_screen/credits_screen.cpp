@@ -11,10 +11,10 @@ namespace {
     // Linhas dos créditos. PLACEHOLDER: troque os textos entre colchetes pelos nomes reais
     // (sem acentos de propósito: a fonte padrão do raylib pode não desenhar todos os acentos)
     constexpr const char *LINES[] = {
-        "Programacao e Design: [SEU NOME]",
-        "Arte (sprites e tilesets): [SEU NOME]",
+        "Programacao e Design: Paulo Cezar",
+        "Arte (sprites e tilesets): Natalia Daiane e Paulo Cezar",
         "Disciplina: Programacao Orientada a Objetos",
-        "Professor(a): [NOME DO PROFESSOR]",
+        "Professor(a): [Paulo Giovani]",
         "",
         "Feito com C++ e raylib",
     };
@@ -37,13 +37,18 @@ namespace {
 // Construtor: posiciona o botão Voltar, centralizado perto do rodapé
 CreditsScreen::CreditsScreen() :
     _backButton{ (Config::SCREEN_WIDTH - BUTTON_WIDTH) / 2.0f, Config::SCREEN_HEIGHT - 120.0f, BUTTON_WIDTH, BUTTON_HEIGHT }
+
 {
     // Nada a fazer aqui: tudo já foi inicializado na lista acima
+    _music.load(ASSETS_PATH "audio/music/credits.mp3");
+    _music.setVolume(0.5f);
+    _music.play();
 }
 
 // Volta ao menu com o botão, ESC ou ENTER
 ScreenType CreditsScreen::update(float)
 {
+    _music.update();
     if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER)) // O ESC só funciona porque o Game desliga a tecla de fechar a janela
     {
         return ScreenType::MAIN_MENU;

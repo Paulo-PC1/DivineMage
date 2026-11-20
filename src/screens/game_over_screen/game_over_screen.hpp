@@ -1,5 +1,6 @@
 #pragma once
 #include "screens/screen/screen.hpp"
+#include "core/audio/music_player.hpp"
 #include "raylib.h"
 
 class GameOverScreen : public Screen {
@@ -12,4 +13,5 @@ public:
 private:
     Rectangle _retryButton;
     Rectangle _menuButton;
+    MusicPlayer _music;
 };

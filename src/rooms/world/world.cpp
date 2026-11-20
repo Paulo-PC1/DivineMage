@@ -126,3 +126,8 @@ void World::changeRoom(int index, Vector2 spawn, Player &player)
     _currentRoom = index;
     player.setPosition(spawn.x, spawn.y); // Método do Entity
 }
+
+bool World::isInBossRoom() const
+{
+    return _currentRoom == ROOM_BOSS;
+}
