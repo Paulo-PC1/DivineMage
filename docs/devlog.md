@@ -76,3 +76,5 @@ Adição do projetil provisório
 
 Adição do projectile uma bola de fogo animada
 Adição do inimigo perseguidor com barra de vida mas sem sprite e adição do mini-Boss com ataque em rajada (circulo ao redor do boss) de projéteis
+
+Commit Final com a adição de todos os arquivos do jogo (faltando apenas os sprites de inimigo poção hud e boss) Jogo construido com C++, Raylib e auxilio do Claude Code para Debug e ideias e funções mais dificeis (como o parser de json)
