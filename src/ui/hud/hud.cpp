@@ -7,7 +7,7 @@ namespace {
 
     // PLACEHOLDER: exporte o heart.aseprite para PNG com este nome (um coração só, quadrado).
     // Enquanto o arquivo não existir, o jogo desenha um coração com formas simples
-    constexpr const char *HEART_SPRITE = ASSETS_PATH "sprites/hud/heart.png";
+    constexpr const char *HEART_SPRITE = ASSETS_PATH "sprites/hud/heart1.png";
 
     constexpr float MARGIN = 16.0f;      // Distância da borda da tela
     constexpr float ICON_SIZE = 32.0f;   // Tamanho do ícone do coração, em pixels

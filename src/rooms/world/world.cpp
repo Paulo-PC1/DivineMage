@@ -46,6 +46,7 @@ bool World::load()
     _rooms[ROOM_1].setPlayerSpawn(Vector2{ 320.0f, 192.0f }); // Onde o jogador começa o jogo
     _rooms[ROOM_1].addEnemy(460.0f, 90.0f);
     _rooms[ROOM_1].addEnemy(470.0f, 250.0f);
+    _rooms[ROOM_1].addEnemy(480.0f, 280.0f);
     _rooms[ROOM_1].addDoor(Door(Rectangle{ RIGHT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_2, Vector2{ SPAWN_LEFT_X, SPAWN_Y }));
     _rooms[ROOM_1].addLoot(Pickup(300.0f, 170.0f)); // Poção que aparece ao limpar a sala
 
@@ -58,6 +59,8 @@ bool World::load()
     _rooms[ROOM_2].addEnemy(320.0f, 64.0f);
     _rooms[ROOM_2].addEnemy(500.0f, 200.0f);
     _rooms[ROOM_2].addEnemy(260.0f, 260.0f);
+    _rooms[ROOM_2].addEnemy(280.0f, 280.0f);
+    _rooms[ROOM_2].addEnemy(220.0f, 220.0f);
     _rooms[ROOM_2].addDoor(Door(Rectangle{ LEFT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_1, Vector2{ SPAWN_RIGHT_X, SPAWN_Y }));
     _rooms[ROOM_2].addDoor(Door(Rectangle{ RIGHT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_BOSS, Vector2{ SPAWN_LEFT_X, SPAWN_Y }));
     _rooms[ROOM_2].addLoot(Pickup(300.0f, 170.0f));
@@ -69,6 +72,8 @@ bool World::load()
     }
     _rooms[ROOM_BOSS].setPlayerSpawn(Vector2{ SPAWN_LEFT_X, SPAWN_Y });
     _rooms[ROOM_BOSS].addBoss(400.0f, 140.0f);
+    _rooms[ROOM_BOSS].addEnemy(440.0f, 180.0f);
+    _rooms[ROOM_BOSS].addEnemy(380.0f, 120.0f);
     _rooms[ROOM_BOSS].addDoor(Door(Rectangle{ LEFT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_2, Vector2{ SPAWN_RIGHT_X, SPAWN_Y }));
 
     _currentRoom = ROOM_1;
@@ -126,7 +131,6 @@ void World::changeRoom(int index, Vector2 spawn, Player &player)
     _currentRoom = index;
     player.setPosition(spawn.x, spawn.y); // Método do Entity
 }
-
 bool World::isInBossRoom() const
 {
     return _currentRoom == ROOM_BOSS;

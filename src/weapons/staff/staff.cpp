@@ -3,7 +3,7 @@
 
 // Constantes que só este arquivo usa (o namespace sem nome as esconde do resto do projeto)
 namespace {
-    constexpr float COOLDOWN = 0.35f;            // Segundos entre um tiro e outro
+    constexpr float COOLDOWN = 0.75f;            // Segundos entre um tiro e outro
     constexpr float PROJECTILE_SPEED = 260.0f;   // Velocidade do projétil (pixels por segundo)
     constexpr int   DAMAGE = 10;                 // Dano de cada projétil
     constexpr float PROJECTILE_LIFETIME = 1.2f;  // Segundos até o projétil sumir sozinho

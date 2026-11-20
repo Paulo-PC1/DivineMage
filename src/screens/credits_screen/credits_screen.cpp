@@ -14,8 +14,8 @@ namespace {
         "Programacao e Design: Paulo Cezar",
         "Arte (sprites e tilesets): Natalia Daiane e Paulo Cezar",
         "Disciplina: Programacao Orientada a Objetos",
-        "Professor(a): [Paulo Giovani]",
-        "",
+        "Professor: [Paulo Giovani]",
+        "Musicas: 16-Bit Fantasy & Adventure Music Pack - by xDeviruchi ",
         "Feito com C++ e raylib",
     };
     constexpr int LINE_COUNT = sizeof(LINES) / sizeof(LINES[0]); // Quantas linhas existem no array
