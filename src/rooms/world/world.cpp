@@ -21,6 +21,11 @@ namespace {
     constexpr float RIGHT_DOOR_X = 608.0f; // 19 * 32: coluna 19
     constexpr float DOOR_SIZE = 32.0f;     // Um tile
 
+    // Frame da porta FECHADA no Door.png: combina com a cor da parede de cada sala (o frame 0 é a porta aberta)
+    constexpr int DOOR_FRAME_RED    = 1; // Sala 1 (parede vermelha)
+    constexpr int DOOR_FRAME_BLUE   = 2; // Sala 2 (parede azul)
+    constexpr int DOOR_FRAME_PURPLE = 3; // Sala do chefe (parede roxa)
+
     // Onde o jogador aparece depois de passar por uma porta (canto superior esquerdo do sprite)
     // Fica a 2 tiles de distância da porta, para não encostar nela de novo assim que chega
     constexpr float SPAWN_LEFT_X  = 64.0f;   // Logo depois da porta da esquerda
@@ -47,7 +52,7 @@ bool World::load()
     _rooms[ROOM_1].addEnemy(460.0f, 90.0f);
     _rooms[ROOM_1].addEnemy(470.0f, 250.0f);
     _rooms[ROOM_1].addEnemy(480.0f, 280.0f);
-    _rooms[ROOM_1].addDoor(Door(Rectangle{ RIGHT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_2, Vector2{ SPAWN_LEFT_X, SPAWN_Y }));
+    _rooms[ROOM_1].addDoor(Door(Rectangle{ RIGHT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_2, Vector2{ SPAWN_LEFT_X, SPAWN_Y }, DOOR_FRAME_RED));
     _rooms[ROOM_1].addLoot(Pickup(300.0f, 170.0f)); // Poção que aparece ao limpar a sala
 
     // ------------------------------------------------------ Sala 2
@@ -61,8 +66,8 @@ bool World::load()
     _rooms[ROOM_2].addEnemy(260.0f, 260.0f);
     _rooms[ROOM_2].addEnemy(280.0f, 280.0f);
     _rooms[ROOM_2].addEnemy(220.0f, 220.0f);
-    _rooms[ROOM_2].addDoor(Door(Rectangle{ LEFT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_1, Vector2{ SPAWN_RIGHT_X, SPAWN_Y }));
-    _rooms[ROOM_2].addDoor(Door(Rectangle{ RIGHT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_BOSS, Vector2{ SPAWN_LEFT_X, SPAWN_Y }));
+    _rooms[ROOM_2].addDoor(Door(Rectangle{ LEFT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_1, Vector2{ SPAWN_RIGHT_X, SPAWN_Y }, DOOR_FRAME_BLUE));
+    _rooms[ROOM_2].addDoor(Door(Rectangle{ RIGHT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_BOSS, Vector2{ SPAWN_LEFT_X, SPAWN_Y }, DOOR_FRAME_BLUE));
     _rooms[ROOM_2].addLoot(Pickup(300.0f, 170.0f));
 
     // ------------------------------------------------------ Sala do mini-boss
@@ -74,7 +79,7 @@ bool World::load()
     _rooms[ROOM_BOSS].addBoss(400.0f, 140.0f);
     _rooms[ROOM_BOSS].addEnemy(440.0f, 180.0f);
     _rooms[ROOM_BOSS].addEnemy(380.0f, 120.0f);
-    _rooms[ROOM_BOSS].addDoor(Door(Rectangle{ LEFT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_2, Vector2{ SPAWN_RIGHT_X, SPAWN_Y }));
+    _rooms[ROOM_BOSS].addDoor(Door(Rectangle{ LEFT_DOOR_X, DOOR_Y, DOOR_SIZE, DOOR_SIZE }, ROOM_2, Vector2{ SPAWN_RIGHT_X, SPAWN_Y }, DOOR_FRAME_PURPLE));
 
     _currentRoom = ROOM_1;
     return true;

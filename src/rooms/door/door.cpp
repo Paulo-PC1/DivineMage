@@ -1,12 +1,18 @@
 // DivineMage - Shooter/src/rooms/door/door.cpp
 #include "rooms/door/door.hpp" // Inclui o cabeçalho da classe Door
+#include <algorithm> // std::min
+
+namespace {
+    constexpr int OPEN_FRAME = 0; // No Door.png, o frame 0 é sempre a porta aberta
+}
 
 // Construtor: a porta nasce TRANCADA (a Room a destranca quando todos os inimigos morrem)
-Door::Door(Rectangle area, int targetRoom, Vector2 spawnInTarget) :
+Door::Door(Rectangle area, int targetRoom, Vector2 spawnInTarget, int closedFrame) :
     _area(area),
     _targetRoom(targetRoom),
     _spawnInTarget(spawnInTarget),
     _locked(true),
+    _closedFrame(closedFrame),
     _texture(nullptr) // A Room entrega a textura depois, com setTexture
 {
     // Nada a fazer aqui: tudo já foi inicializado na lista acima
@@ -29,12 +35,19 @@ bool Door::isLocked() const
     return _locked;
 }
 
-// Desenha a porta. O sprite Door.png terá 2 frames lado a lado: frame 0 = fechada, frame 1 = aberta
+// Desenha a porta. O sprite Door.png tem 4 frames de 32x32 lado a lado:
+// frame 0 = aberta, frame 1 = fechada vermelha, frame 2 = fechada azul, frame 3 = fechada roxa
 void Door::draw() const
 {
     if (_texture != nullptr && _texture->id != 0) // Se o sprite existe
     {
-        int frame = _locked ? 0 : 1; // Fechada usa o primeiro frame, aberta usa o segundo
+        // Quantos frames cabem na imagem (largura da imagem dividida pela largura de um frame)
+        int frameCount = (int)(_texture->width / _area.width);
+
+        // Trancada usa o frame fechado da sala; se a imagem tiver menos frames que isso
+        // (ex: um Door.png antigo de 2 frames), usa o último frame que existe
+        int closedFrame = std::max(0, std::min(_closedFrame, frameCount - 1)); // O max(0, ...) protege contra uma imagem menor que 1 frame
+        int frame = _locked ? closedFrame : OPEN_FRAME;
         Rectangle sourceRec = { frame * _area.width, 0.0f, _area.width, _area.height }; // Recorte do frame dentro da folha
         DrawTextureRec(*_texture, sourceRec, Vector2{ _area.x, _area.y }, WHITE);
         return;

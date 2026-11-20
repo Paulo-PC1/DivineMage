@@ -9,7 +9,7 @@ namespace {
     // Enquanto o arquivo não existir, o jogo desenha formas simples no lugar (e não dá erro).
     constexpr const char *ENEMY_SPRITE  = ASSETS_PATH "sprites/enemy/Enemy_Walk.png";   // Folha horizontal de frames 32x32
     constexpr const char *BOSS_SPRITE   = ASSETS_PATH "sprites/enemy/Boss_Walk.png";    // Folha horizontal de frames 64x64
-    constexpr const char *DOOR_SPRITE   = ASSETS_PATH "sprites/tilesets/door1.png";           // 2 frames de 32x32: fechada e aberta
+    constexpr const char *DOOR_SPRITE   = ASSETS_PATH "tilesets/door.png";           // 2 frames de 32x32: fechada e aberta
     constexpr const char *POTION_SPRITE = ASSETS_PATH "sprites/potion/health_potion.png";  // 1 frame de 32x32
 
     // Carrega um sprite SE o arquivo existir. Se não existir, devolve uma textura zerada (id = 0), sem erro no console

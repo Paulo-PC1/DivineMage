@@ -17,7 +17,7 @@ namespace {
     constexpr int   CONTACT_DAMAGE = 20;    // Dano ao encostar
 
     // O ataque: uma rajada de projéteis em anel (todas as direções ao mesmo tempo)
-    constexpr float ATTACK_COOLDOWN = 2.5f;     // Segundos entre uma rajada e outra
+    constexpr float ATTACK_COOLDOWN = 1.5f;     // Segundos entre uma rajada e outra
     constexpr int   PROJECTILES_PER_BURST = 8;  // Quantos projéteis em cada rajada
     constexpr float PROJECTILE_SPEED = 140.0f;  // Velocidade de cada projétil
     constexpr int   PROJECTILE_DAMAGE = 15;     // Dano de cada projétil
