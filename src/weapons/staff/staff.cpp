@@ -7,7 +7,7 @@ namespace {
     constexpr float PROJECTILE_SPEED = 260.0f;   // Velocidade do projétil (pixels por segundo)
     constexpr int   DAMAGE = 10;                 // Dano de cada projétil
     constexpr float PROJECTILE_LIFETIME = 1.2f;  // Segundos até o projétil sumir sozinho
-    constexpr float PROJECTILE_RADIUS = 4.0f;    // Raio do projétil (define também o tamanho do hitbox)
+    constexpr float PROJECTILE_RADIUS = 5.0f;    // Raio do projétil (define também o tamanho do hitbox)
 }
 
 // Construtor: a BASE (Weapon) vem primeiro na lista de inicialização
@@ -28,8 +28,8 @@ bool Staff::shoot(Vector2 origin, Vector2 direction, std::vector<Projectile> &pr
         return false; // Ainda em cooldown, não atira
     }
 
-    // Cria o projétil direto dentro do vetor (origin é o CENTRO do projétil)
-    projectiles.emplace_back(origin, direction, _projectileSpeed, _damage, _projectileLifetime, PROJECTILE_RADIUS, SKYBLUE);
+    // Cria o projétil direto dentro do vetor (origin é o CENTRO do projétil). ORANGE é a cor base da bola de fogo
+    projectiles.emplace_back(origin, direction, _projectileSpeed, _damage, _projectileLifetime, PROJECTILE_RADIUS, ORANGE);
 
     startCooldown(); // Método da classe base: reinicia o contador do cooldown
 

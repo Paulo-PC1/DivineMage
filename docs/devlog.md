@@ -71,3 +71,7 @@ Criação de todos os arquivos de cabeçalho(.hpp) e inicio da implementação d
 
 Adição das implementações das classes Actor e teste de validação do game (gameplay fica igual a estado que estava sem herança)
 Adição do projetil provisório
+
+## Dia 19/11/2026
+
+adição do projectile uma bola de fogo animada
