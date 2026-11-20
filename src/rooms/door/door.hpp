@@ -16,9 +16,13 @@ public:
     int getTargetRoom() const;
     Vector2 getSpawnInTarget() const;  // onde o jogador aparece na sala de destino
 
+    // A Room entrega o endereço da textura da porta (ela é a dona). Se for nullptr ou id 0, desenha um placeholder
+    void setTexture(const Texture2D *texture);
+
 private:
     Rectangle _area;
     int _targetRoom;
     Vector2 _spawnInTarget;
     bool _locked;
+    const Texture2D *_texture;  // NÃO é dono: a textura pertence à Room
 };

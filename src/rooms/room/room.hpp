@@ -17,7 +17,7 @@ public:
     Room(const Room &) = delete;
     Room &operator=(const Room &) = delete;
 
-    bool load(const std::string &mapPath, const std::string &tilesetPath); // mapa + texturas dos inimigos
+    bool load(const std::string &mapPath, const std::string &tilesetPath); // mapa + texturas dos inimigos, porta e poção
     void unload();
 
     // Montagem (chame DEPOIS do load: os inimigos apontam para as texturas carregadas)
@@ -30,6 +30,8 @@ public:
 
     void update(float dt, Player &player);
     void draw() const;
+
+    void clearProjectiles();                                  // o World chama ao sair da sala (nenhum tiro fica "congelado" no ar)
 
     const std::vector<Rectangle> &getCollisionRects() const;  // paredes + portas trancadas
     std::vector<Projectile> &getPlayerProjectiles();          // o Player::shoot adiciona aqui
@@ -51,6 +53,8 @@ private:
     TileMap _tilemap;
     Texture2D _enemyTexture;
     Texture2D _bossTexture;
+    Texture2D _doorTexture;
+    Texture2D _potionTexture;
     std::vector<Enemy> _enemies;               // só inimigos comuns (evita slicing)
     std::vector<MiniBoss> _bosses;             // 0 ou 1; nunca apagado (isBossDefeated lê daqui)
     std::vector<Door> _doors;

@@ -74,4 +74,5 @@ Adição do projetil provisório
 
 ## Dia 19/11/2026
 
-adição do projectile uma bola de fogo animada
+Adição do projectile uma bola de fogo animada
+Adição do inimigo perseguidor com barra de vida mas sem sprite e adição do mini-Boss com ataque em rajada (circulo ao redor do boss) de projéteis

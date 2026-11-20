@@ -15,7 +15,11 @@ public:
     bool tryCollect(Actor &target);
     bool isCollected() const;
 
+    // A Room entrega o endereço da textura da poção (ela é a dona). Se for nullptr ou id 0, desenha um placeholder
+    void setTexture(const Texture2D *texture);
+
 private:
     HealthPotion _potion;   // composição: a poção por valor, sem ponteiro e sem delete
     bool _collected;
+    const Texture2D *_texture;  // NÃO é dono: a textura pertence à Room
 };

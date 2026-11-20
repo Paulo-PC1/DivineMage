@@ -3,7 +3,10 @@
 #include "raylib.h" // Inclui a biblioteca Raylib para manipulação de gráficos e entrada do usuário
 #include "core/config/config.hpp" // Inclui a classe Config para acessar as configurações do jogo
 #include "screens/screen/screen.hpp" // Inclui a classe Screen para gerenciar a tela do jogo
+#include "screens/menu_screen/menu_screen.hpp" // Inclui a tela do menu principal
 #include "screens/game_screen/game_screen.hpp" // Inclui a classe GameScreen para gerenciar a tela de gameplay do jogo
+#include "screens/game_over_screen/game_over_screen.hpp" // Inclui a tela de game over
+#include "screens/credits_screen/credits_screen.hpp" // Inclui a tela de créditos
 #include <algorithm> // Inclui a biblioteca algorithm para utilizar a função std::min
 
 Game::Game() : _currentScreen(nullptr), _shouldClose(false) // Inicializa ponteiro e variavel de controle da tela atual do jogo e da janela do jogo
@@ -11,7 +14,8 @@ Game::Game() : _currentScreen(nullptr), _shouldClose(false) // Inicializa pontei
     ChangeDirectory(GetApplicationDirectory()); // Antes de carregar qualquer arquivo
     InitWindow(Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, Config::WINDOW_TITLE); // Inicializa a janela do jogo com largura 1280, altura 720 e título "DivineMage"
     SetTargetFPS(Config::TARGET_FPS); // Define a taxa de quadros por segundo (FPS) para 60, garantindo uma atualização suave da tela e dos elementos do jogo.
-    changeScreen(ScreenType::GAMEPLAY); // Define a tela inicial do jogo como a tela de gameplay, permitindo que o jogador comece a jogar imediatamente.
+    SetExitKey(KEY_NULL); // Desliga o ESC como tecla de fechar a janela (por padrão o raylib fecha o jogo com ESC), para as telas poderem usar o ESC
+    changeScreen(ScreenType::MAIN_MENU); // Define a tela inicial do jogo como o menu principal.
 }
 
 Game::~Game() // Destrutor da classe Game, responsável por fechar a janela do jogo e liberar recursos alocados.
@@ -63,16 +67,16 @@ void Game::changeScreen(ScreenType screenType) // Muda tela atual do jogo
     switch(screenType) // Verifica o tipo de tela a ser exibida
     {
         case ScreenType::MAIN_MENU:
-            // newScreen = new MenuScreen(); // Cria uma nova instância da tela do menu principal do jogo
+            newScreen = new MenuScreen(); // Cria uma nova instância da tela do menu principal do jogo
             break;
         case ScreenType::GAMEPLAY:
             newScreen = new GameScreen(); // Cria uma nova instância da tela de gameplay do jogo
             break;
         case ScreenType::CREDITS:
-            // newScreen = new CreditsScreen(); // Cria uma nova instância da tela de créditos do jogo
+            newScreen = new CreditsScreen(); // Cria uma nova instância da tela de créditos do jogo
             break;
         case ScreenType::GAME_OVER:
-            // newScreen = new GameOverScreen(); // Cria uma nova instância da tela de game over do jogo
+            newScreen = new GameOverScreen(); // Cria uma nova instância da tela de game over do jogo
             break;
         case ScreenType::EXIT:
             _shouldClose = true; // Define a variável de controle da janela do jogo como verdadeira, indicando que a janela deve ser fechada
